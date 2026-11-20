@@ -20,8 +20,8 @@ export default function QrCard() {
   }, []);
 
   return (
-    <div className="flex flex-col items-center rounded-3xl bg-white p-6 text-navy shadow-xl">
-      <div className="grid h-52 w-52 place-items-center rounded-xl ring-1 ring-navy/10">
+    <div className="flex flex-col items-center text-navy">
+      <div className="grid h-52 w-52 place-items-center rounded-md border border-navy/20">
         {png ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img src={png} alt="QR code vers le site SOAVA" className="h-full w-full" />
@@ -34,7 +34,7 @@ export default function QrCard() {
         <a
           href={png}
           download="soava-qr.png"
-          className="mt-4 rounded-full bg-brand-green px-5 py-2 text-sm font-semibold text-white hover:brightness-110"
+          className="mt-4 rounded-md bg-navy px-5 py-2.5 text-sm font-semibold text-white hover:bg-navy/90"
         >
           Télécharger le QR code
         </a>

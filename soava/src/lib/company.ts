@@ -1,4 +1,4 @@
-// Informations de l'entreprise — SEUL fichier à modifier pour mettre à jour
+// Informations de l'entreprise. Seul fichier à modifier pour mettre à jour
 // les contacts affichés sur le site et dans la fiche contact (.vcf).
 // ⚠️ Valeurs d'exemple : à remplacer par les coordonnées réelles de SOAVA.
 

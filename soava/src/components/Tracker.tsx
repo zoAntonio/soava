@@ -9,7 +9,7 @@ const STEPS = [
   "Vérifié par l'équipe",
   "Remis au transporteur",
   "En transit international",
-  "Dédouanement Madagascar",
+  "Dédouanement à Madagascar",
   "Livré",
 ];
 
@@ -21,126 +21,147 @@ type Parcel = {
   steps: Step[];
 };
 
+// Exemples de démonstration, pas de vrais colis.
 const PARCELS: Parcel[] = [
   {
     code: "SOA-2026-0142",
     item: "Ordinateur portable",
-    carrier: "DHL Express",
+    carrier: "Transporteur partenaire",
     progress: 4,
     steps: [
-      { label: STEPS[0], place: "Point de collecte · Montréal, QC", date: "12 nov. · 10:24" },
-      { label: STEPS[1], place: "Entrepôt SOAVA · Montréal, QC", date: "13 nov. · 15:02" },
-      { label: STEPS[2], place: "DHL · Aéroport de Mirabel", date: "14 nov. · 08:40" },
-      { label: STEPS[3], place: "Vol vers Antananarivo (via Paris)", date: "16 nov. · 22:15" },
-      { label: STEPS[4], place: "Antananarivo, Madagascar", date: "Prévu 21 nov." },
+      { label: STEPS[0], place: "Point de collecte, Montréal", date: "12 nov. 10:24" },
+      { label: STEPS[1], place: "Entrepôt SOAVA, Montréal", date: "13 nov. 15:02" },
+      { label: STEPS[2], place: "Aéroport de Mirabel", date: "14 nov. 08:40" },
+      { label: STEPS[3], place: "Vol vers Antananarivo", date: "16 nov. 22:15" },
+      { label: STEPS[4], place: "Antananarivo", date: "Prévu 21 nov." },
       { label: STEPS[5], place: "Adresse du destinataire", date: "Prévu 23 nov." },
     ],
   },
   {
     code: "SOA-2026-0087",
-    item: "Vêtements & chaussures",
-    carrier: "FedEx",
+    item: "Vêtements et chaussures",
+    carrier: "Transporteur partenaire",
     progress: 6,
     steps: [
-      { label: STEPS[0], place: "Point de collecte · Laval, QC", date: "28 oct. · 14:10" },
-      { label: STEPS[1], place: "Entrepôt SOAVA · Montréal, QC", date: "29 oct. · 11:30" },
-      { label: STEPS[2], place: "FedEx · Montréal", date: "30 oct. · 09:05" },
-      { label: STEPS[3], place: "Transit via Dubaï", date: "02 nov. · 03:20" },
-      { label: STEPS[4], place: "Antananarivo, Madagascar", date: "08 nov. · 13:45" },
-      { label: STEPS[5], place: "Antananarivo · remis au client", date: "10 nov. · 16:30" },
+      { label: STEPS[0], place: "Point de collecte, Laval", date: "28 oct. 14:10" },
+      { label: STEPS[1], place: "Entrepôt SOAVA, Montréal", date: "29 oct. 11:30" },
+      { label: STEPS[2], place: "Montréal", date: "30 oct. 09:05" },
+      { label: STEPS[3], place: "En vol", date: "02 nov. 03:20" },
+      { label: STEPS[4], place: "Antananarivo", date: "08 nov. 13:45" },
+      { label: STEPS[5], place: "Remis au destinataire", date: "10 nov. 16:30" },
     ],
   },
 ];
 
 export default function Tracker() {
-  const [input, setInput] = useState("SOA-2026-0142");
+  const [input, setInput] = useState("");
   const [parcel, setParcel] = useState<Parcel | null>(PARCELS[0]);
-  const [notFound, setNotFound] = useState(false);
+  const [error, setError] = useState("");
 
   function search(code: string) {
-    const found = PARCELS.find((p) => p.code === code.trim().toUpperCase());
-    setParcel(found ?? null);
-    setNotFound(!found);
+    const clean = code.trim().toUpperCase();
+    if (!clean) {
+      setError("Saisissez un numéro de suivi.");
+      return;
+    }
+    const found = PARCELS.find((p) => p.code === clean);
+    if (!found) {
+      setParcel(null);
+      setError("Aucun colis ne correspond à ce numéro. Vérifiez la saisie et réessayez.");
+      return;
+    }
+    setError("");
+    setParcel(found);
   }
 
   return (
-    <div className="overflow-hidden rounded-3xl bg-white shadow-2xl shadow-navy/10 ring-1 ring-navy/10">
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          search(input);
-        }}
-        className="flex flex-col gap-3 border-b border-navy/10 p-5 sm:flex-row sm:p-6"
-      >
-        <label className="sr-only" htmlFor="code">
-          Numéro de suivi
-        </label>
-        <input
-          id="code"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          placeholder="Ex. SOA-2026-0142"
-          className="flex-1 rounded-xl border border-navy/15 bg-soft px-4 py-3 font-mono text-sm outline-none focus:border-brand-green focus:ring-2 focus:ring-brand-green/30"
-        />
-        <button className="rounded-xl bg-navy px-6 py-3 font-semibold text-white transition hover:bg-navy/90">
-          Suivre mon colis
-        </button>
-      </form>
-
-      <div className="flex flex-wrap items-center gap-2 px-5 pt-3 text-xs text-navy/60 sm:px-6">
-        Essayez :
-        {PARCELS.map((p) => (
-          <button
-            key={p.code}
-            type="button"
-            onClick={() => {
-              setInput(p.code);
-              search(p.code);
-            }}
-            className="rounded-full bg-soft px-3 py-1 font-mono hover:bg-navy/10"
-          >
-            {p.code}
+    <section aria-labelledby="suivi-titre" className="rounded-xl border border-navy/20 bg-white">
+      <div className="border-b border-navy/15 p-5 sm:p-6">
+        <h2 id="suivi-titre" className="text-lg font-bold text-navy">
+          Suivre un colis
+        </h2>
+        <form
+          noValidate
+          onSubmit={(e) => {
+            e.preventDefault();
+            search(input);
+          }}
+          className="mt-4 flex flex-col gap-3 sm:flex-row"
+        >
+          <label className="sr-only" htmlFor="code">
+            Numéro de suivi
+          </label>
+          <input
+            id="code"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            placeholder="SOA-2026-0142"
+            aria-invalid={!!error}
+            aria-describedby={error ? "code-erreur" : undefined}
+            className="min-w-0 flex-1 rounded-md border border-navy/30 px-4 py-3 font-mono text-sm outline-none focus:border-brand-green"
+          />
+          <button className="rounded-md bg-navy px-6 py-3 font-semibold text-white hover:bg-navy/90">
+            Rechercher
           </button>
-        ))}
-      </div>
-
-      {notFound && (
-        <p className="p-6 font-medium text-brand-red">
-          Aucun colis trouvé pour ce numéro. Vérifiez la saisie.
+        </form>
+        {error && (
+          <p id="code-erreur" role="alert" className="mt-3 text-sm font-medium text-brand-red">
+            {error}
+          </p>
+        )}
+        <p className="mt-3 text-xs text-navy/60">
+          Exemple de suivi avec des données fictives. Essayez{" "}
+          {PARCELS.map((p, i) => (
+            <span key={p.code}>
+              <button
+                type="button"
+                onClick={() => {
+                  setInput(p.code);
+                  search(p.code);
+                }}
+                className="font-mono underline underline-offset-2 hover:text-navy"
+              >
+                {p.code}
+              </button>
+              {i < PARCELS.length - 1 ? " ou " : "."}
+            </span>
+          ))}
         </p>
-      )}
+      </div>
 
       {parcel && (
         <div className="p-5 sm:p-6">
-          <div className="mb-6 flex flex-wrap items-center justify-between gap-2">
+          <div className="mb-6 flex flex-wrap items-start justify-between gap-x-4 gap-y-2">
             <div>
               <p className="text-sm text-navy/60">{parcel.item}</p>
               <p className="font-mono font-semibold">{parcel.code}</p>
             </div>
-            <span className="rounded-full bg-brand-green/10 px-3 py-1 text-sm font-semibold text-brand-green">
+            <p className="rounded-md bg-brand-green px-3 py-1 text-sm font-semibold text-white">
               {parcel.steps[parcel.progress - 1].label}
-            </span>
-            <span className="text-sm text-navy/60">
-              Transporteur : <b className="text-navy">{parcel.carrier}</b>
-            </span>
+            </p>
           </div>
 
-          <ol key={parcel.code} className="relative ml-3 space-y-5 border-l-2 border-navy/10">
+          <ol key={parcel.code} className="ml-2.5 space-y-5 border-l-2 border-navy/15">
             {parcel.steps.map((s, i) => {
               const done = i < parcel.progress;
-              const current = i === parcel.progress - 1 && parcel.progress < 6;
               return (
-                <li key={s.label} style={{ "--d": i * 90 + 100 + "ms" } as React.CSSProperties} className="step-in relative pl-6">
+                <li
+                  key={s.label}
+                  style={{ "--d": i * 70 + "ms" } as React.CSSProperties}
+                  className="step-in relative pl-6"
+                >
                   <span
-                    className={`absolute -left-[11px] top-0.5 grid h-5 w-5 place-items-center rounded-full text-[10px] text-white ${
-                      done ? "bg-brand-green" : "bg-navy/15"
-                    } ${current ? "pulse-ring" : ""}`}
-                  >
-                    {done ? "✓" : ""}
-                  </span>
-                  <p className={`font-semibold ${done ? "" : "text-navy/40"}`}>{s.label}</p>
-                  <p className={`text-sm ${done ? "text-navy/70" : "text-navy/40"}`}>
-                    {s.place} · {s.date}
+                    aria-hidden
+                    className={`absolute -left-[9px] top-1 h-4 w-4 rounded-full border-2 ${
+                      done ? "border-brand-green bg-brand-green" : "border-navy/25 bg-white"
+                    }`}
+                  />
+                  <p className={`font-semibold ${done ? "text-navy" : "text-navy/45"}`}>
+                    {s.label}
+                    <span className="sr-only">{done ? " (terminé)" : " (à venir)"}</span>
+                  </p>
+                  <p className={`text-sm ${done ? "text-navy/70" : "text-navy/45"}`}>
+                    {s.place}, {s.date}
                   </p>
                 </li>
               );
@@ -148,6 +169,6 @@ export default function Tracker() {
           </ol>
         </div>
       )}
-    </div>
+    </section>
   );
 }
