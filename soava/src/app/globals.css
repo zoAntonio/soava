@@ -1,0 +1,41 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #0a1633;
+  --navy: #0a1633;
+  --red: #e30200;
+  --green: #429600;
+  --soft: #f2f8ec;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-navy: var(--navy);
+  --color-brand-red: var(--red);
+  --color-brand-green: var(--green);
+  --color-soft: var(--soft);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+}
+
+@keyframes drive {
+  from { left: 0%; }
+  to { left: 62%; }
+}
+@keyframes pulse-ring {
+  0% { box-shadow: 0 0 0 0 rgb(66 150 0 / 0.5); }
+  100% { box-shadow: 0 0 0 12px rgb(66 150 0 / 0); }
+}
+.pulse-ring { animation: pulse-ring 1.6s infinite; }
