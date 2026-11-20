@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+/* IDENTITÉ — rôle des couleurs (≈ 60 / 30 / 10)
+   Bleu marine = couleur MÈRE : structure, titres, boutons principaux, fonds forts.
+   Vert        = couleur SECONDAIRE : progression, validation, étiquettes, survols.
+   Rouge       = SIGNATURE (feuille d'érable) : un seul mot accrocheur, petits traits, Canada. */
 :root {
   --background: #ffffff;
   --foreground: #0a1633;
@@ -39,3 +43,63 @@ body {
   100% { box-shadow: 0 0 0 12px rgb(66 150 0 / 0); }
 }
 .pulse-ring { animation: pulse-ring 1.6s infinite; }
+
+/* ---------- Animations (douces, sans gêner la lecture) ---------- */
+@keyframes rise {
+  from { opacity: 0; transform: translateY(22px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes grow-x {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+@keyframes fly {
+  0% { left: 0%; opacity: 0; }
+  12% { opacity: 1; }
+  88% { opacity: 1; }
+  100% { left: 100%; opacity: 0; }
+}
+@keyframes menu-in {
+  from { opacity: 0; transform: translateY(-8px) scale(0.97); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+/* Entrée de la page d'accueil, en cascade */
+.hero-in { animation: rise 0.8s cubic-bezier(0.22, 1, 0.36, 1) both; animation-delay: var(--d, 0ms); }
+.bar-in { transform-origin: left; animation: grow-x 1s cubic-bezier(0.22, 1, 0.36, 1) 0.4s both; }
+.plane-fly { position: absolute; top: -14px; animation: fly 3.4s ease-in-out infinite; }
+.float-soft { animation: float 5s ease-in-out infinite; }
+
+/* Apparition au défilement (activée seulement par le script, jamais masquée sans lui) */
+[data-reveal].pre {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--d, 0ms);
+}
+[data-reveal].pre.in { opacity: 1; transform: none; }
+
+/* Étapes du suivi */
+.step-in { animation: rise 0.5s cubic-bezier(0.22, 1, 0.36, 1) both; animation-delay: var(--d, 0ms); }
+
+details[open] > nav { animation: menu-in 0.2s ease-out; }
+
+/* Interactions */
+a, button { transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease, filter 0.2s ease; }
+a[class*="rounded-full"]:hover, button[class*="rounded-"]:hover { transform: translateY(-2px); }
+a[class*="rounded-full"]:active, button[class*="rounded-"]:active { transform: translateY(0) scale(0.98); }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
+  }
+  .plane-fly { left: 50%; opacity: 1; }
+}

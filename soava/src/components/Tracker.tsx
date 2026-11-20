@@ -125,12 +125,12 @@ export default function Tracker() {
             </span>
           </div>
 
-          <ol className="relative ml-3 space-y-5 border-l-2 border-navy/10">
+          <ol key={parcel.code} className="relative ml-3 space-y-5 border-l-2 border-navy/10">
             {parcel.steps.map((s, i) => {
               const done = i < parcel.progress;
               const current = i === parcel.progress - 1 && parcel.progress < 6;
               return (
-                <li key={s.label} className="relative pl-6">
+                <li key={s.label} style={{ "--d": i * 90 + 100 + "ms" } as React.CSSProperties} className="step-in relative pl-6">
                   <span
                     className={`absolute -left-[11px] top-0.5 grid h-5 w-5 place-items-center rounded-full text-[10px] text-white ${
                       done ? "bg-brand-green" : "bg-navy/15"

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Tracker from "@/components/Tracker";
 import QrCard from "@/components/QrCard";
+import RevealInit from "@/components/RevealInit";
 import { company } from "@/lib/company";
 
 const icon = (d: React.ReactNode) => (
@@ -41,7 +42,7 @@ const navLinks = [
 const highlights = [
   { icon: icons.plane, title: "Canada ↔ Madagascar", text: "Une liaison dédiée entre les deux pays.", color: "bg-navy" },
   { icon: icons.eye, title: "Suivi de bout en bout", text: "Votre colis visible à chaque étape.", color: "bg-brand-green" },
-  { icon: icons.shield, title: "Colis vérifiés", text: "Contrôle avant chaque expédition.", color: "bg-brand-red" },
+  { icon: icons.shield, title: "Colis vérifiés", text: "Contrôle avant chaque expédition.", color: "bg-navy" },
 ];
 
 const services = [
@@ -72,9 +73,11 @@ const network = ["Collecte", "Vérification", "Expédition", "Livraison"];
 const values = [
   { icon: icons.shield, title: "Fiabilité", text: "Des processus rigoureux, de la réception à la remise finale.", color: "bg-navy" },
   { icon: icons.eye, title: "Transparence", text: "Un statut clair à chaque étape, accessible à tout moment.", color: "bg-brand-green" },
-  { icon: icons.handshake, title: "Proximité", text: "Une équipe présente des deux côtés, à l’écoute de ses clients.", color: "bg-brand-red" },
+  { icon: icons.handshake, title: "Proximité", text: "Une équipe présente des deux côtés, à l’écoute de ses clients.", color: "bg-brand-green" },
   { icon: icons.leaf, title: "Engagement", text: "Des racines canadiennes, un cap sur Madagascar : relier durablement deux pays.", color: "bg-navy" },
 ];
+
+const d = (ms: number) => ({ "--d": ms + "ms" }) as React.CSSProperties;
 
 export default function Home() {
   const phoneHref = `tel:${company.canada.phone.replace(/\s/g, "")}`;
@@ -101,15 +104,16 @@ export default function Home() {
               preload
             />
           </a>
-          <nav className="hidden gap-8 text-sm font-semibold text-navy md:flex">
-            {navLinks.map(([h, l]) => (
-              <a key={h} href={h} className="hover:text-brand-red">{l}</a>
+          <nav className="ml-auto mr-6 hidden gap-8 text-sm font-semibold text-navy md:flex">
+            {navLinks.filter(([h]) => h !== "#contact").map(([h, l]) => (
+              <a key={h} href={h} className="hover:text-brand-green">{l}</a>
             ))}
           </nav>
+          <a href="#contact" className="hidden rounded-full bg-navy px-5 py-2 text-sm font-semibold text-white hover:bg-navy/90 md:inline-block">
+            Nous contacter
+          </a>
           <div className="flex shrink-0 items-center gap-2">
-            <a href="#suivi" className="rounded-full bg-brand-red px-4 py-2 text-sm font-semibold text-white hover:brightness-110 sm:px-5">
-              Suivre un envoi
-            </a>
+            
             <details className="relative md:hidden">
               <summary
                 aria-label="Menu"
@@ -134,19 +138,19 @@ export default function Home() {
         <section className="relative bg-soft">
           <div className="mx-auto grid max-w-6xl items-center gap-10 px-5 pb-14 pt-10 sm:gap-12 sm:pb-20 sm:pt-16 lg:grid-cols-[1.05fr_1fr]">
             <div>
-              <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand-green sm:text-sm">
+              <p style={d(0)} className="hero-in text-xs font-bold uppercase tracking-[0.2em] text-brand-green sm:text-sm">
                 Global Logistics
               </p>
-              <h1 className="mt-4 text-[2.1rem] font-bold leading-[1.1] tracking-tight text-navy sm:text-5xl lg:text-[3.4rem]">
+              <h1 style={d(100)} className="hero-in mt-4 text-[2.1rem] font-bold leading-[1.1] tracking-tight text-navy sm:text-5xl lg:text-[3.4rem]">
                 Le Canada et Madagascar,
                 <br />
                 <span className="text-brand-red">sans frontières.</span>
               </h1>
-              <p className="mt-5 max-w-xl text-base leading-relaxed text-navy/70 sm:mt-6 sm:text-lg">
+              <p style={d(220)} className="hero-in mt-5 max-w-xl text-base leading-relaxed text-navy/70 sm:mt-6 sm:text-lg">
                 SOAVA Global Logistics prend en charge vos colis de bout en bout : collecte,
                 contrôle, transport international et livraison, avec un suivi précis à chaque étape.
               </p>
-              <div className="mt-7 grid gap-3 min-[460px]:flex min-[460px]:flex-wrap">
+              <div style={d(340)} className="hero-in mt-7 grid gap-3 min-[460px]:flex min-[460px]:flex-wrap">
                 <a href="#services" className="rounded-full bg-navy px-7 py-3.5 text-center font-semibold text-white hover:bg-navy/90">
                   Découvrir nos services
                 </a>
@@ -154,10 +158,10 @@ export default function Home() {
                   Nous contacter
                 </a>
               </div>
-              <div className="mt-9 flex max-w-md items-center gap-3" aria-hidden>
+              <div style={d(460)} className="hero-in mt-9 flex max-w-md items-center gap-3" aria-hidden>
                 <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-brand-red text-xs font-bold text-white">CA</span>
                 <span className="relative h-0 flex-1 border-t-2 border-dashed border-navy/30">
-                  <span className="absolute -top-3.5 left-1/2 -translate-x-1/2 rotate-90 rounded-full bg-soft p-0.5 text-navy">
+                  <span className="plane-fly -translate-x-1/2 rotate-90 rounded-full bg-soft p-0.5 text-navy">
                     {icons.plane}
                   </span>
                 </span>
@@ -165,25 +169,25 @@ export default function Home() {
               </div>
             </div>
 
-            <div id="suivi" className="scroll-mt-24">
+            <div id="suivi" style={d(300)} className="hero-in scroll-mt-24">
               <Tracker />
               <p className="mt-3 text-center text-xs text-navy/50">
                 Aperçu du service de suivi — données de démonstration.
               </p>
             </div>
           </div>
-          <div className="flex h-1.5">
-            <span className="flex-1 bg-navy" />
-            <span className="flex-1 bg-brand-green" />
-            <span className="flex-1 bg-brand-red" />
+          <div className="bar-in flex h-1.5">
+            <span className="flex-[6] bg-navy" />
+            <span className="flex-[3] bg-brand-green" />
+            <span className="flex-[1] bg-brand-red" />
           </div>
         </section>
 
         {/* En un coup d'œil */}
         <section className="py-10 sm:py-14">
           <div className="mx-auto grid max-w-6xl gap-4 px-5 sm:grid-cols-3">
-            {highlights.map((h) => (
-              <div key={h.title} className="flex items-center gap-4">
+            {highlights.map((h, i) => (
+              <div key={h.title} data-reveal style={d(i * 120)} className="flex items-center gap-4">
                 <span className={`grid h-14 w-14 shrink-0 place-items-center rounded-2xl text-white ${h.color}`}>
                   {h.icon}
                 </span>
@@ -200,13 +204,15 @@ export default function Home() {
         <section id="services" className="scroll-mt-20 bg-soft py-14 sm:py-20">
           <div className="mx-auto max-w-6xl px-5">
             <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand-green sm:text-sm">Nos services</p>
-            <h2 className="mt-3 max-w-2xl text-2xl font-bold text-navy sm:text-4xl">
+            <h2 data-reveal className="mt-3 max-w-2xl text-2xl font-bold text-navy sm:text-4xl">
               Une chaîne logistique maîtrisée, d’un pays à l’autre.
             </h2>
             <div className="mt-8 grid gap-4 sm:mt-12 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">
-              {services.map((s) => (
+              {services.map((s, i) => (
                 <article
                   key={s.title}
+                  data-reveal
+                  style={d(i * 110)}
                   className="group flex gap-4 rounded-2xl border border-navy/10 bg-white p-5 transition hover:-translate-y-1 hover:border-brand-green hover:shadow-xl sm:block sm:p-7"
                 >
                   <span className="grid h-14 w-14 shrink-0 place-items-center self-start rounded-xl bg-navy text-white transition group-hover:bg-brand-green">
@@ -226,7 +232,7 @@ export default function Home() {
         <section id="reseau" className="scroll-mt-20 bg-navy py-14 text-white sm:py-20">
           <div className="mx-auto max-w-6xl px-5">
             <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand-green sm:text-sm">Notre réseau</p>
-            <h2 className="mt-3 max-w-2xl text-2xl font-bold sm:text-4xl">
+            <h2 data-reveal className="mt-3 max-w-2xl text-2xl font-bold sm:text-4xl">
               Deux pays, une seule équipe, un suivi continu.
             </h2>
             <p className="mt-4 max-w-2xl text-white/70">
@@ -236,8 +242,8 @@ export default function Home() {
 
             <ol className="mt-8 grid grid-cols-2 gap-3 sm:mt-12 sm:gap-4 md:grid-cols-4">
               {network.map((n, i) => (
-                <li key={n} className="rounded-2xl bg-white/5 p-4 ring-1 ring-white/10 sm:p-6">
-                  <span className="grid h-10 w-10 place-items-center rounded-full bg-brand-red text-sm font-bold">
+                <li key={n} data-reveal style={d(i * 130)} className="rounded-2xl bg-white/5 p-4 ring-1 ring-white/10 sm:p-6">
+                  <span className="grid h-10 w-10 place-items-center rounded-full bg-brand-green text-sm font-bold">
                     {i + 1}
                   </span>
                   <p className="mt-4 text-lg font-bold">{n}</p>
@@ -251,12 +257,13 @@ export default function Home() {
         <section id="valeurs" className="scroll-mt-20 py-14 sm:py-20">
           <div className="mx-auto max-w-6xl px-5">
             <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand-green sm:text-sm">Nos valeurs</p>
-            <h2 className="mt-3 max-w-2xl text-2xl font-bold text-navy sm:text-4xl">
+            <h2 data-reveal className="mt-3 max-w-2xl text-2xl font-bold text-navy sm:text-4xl">
               Ce qui guide chacun de nos envois.
             </h2>
             <div className="mt-8 grid gap-4 sm:mt-12 sm:grid-cols-2 lg:grid-cols-4">
-              {values.map((v) => (
-                <div key={v.title} className={`rounded-2xl p-6 text-white ${v.color}`}>
+              {values.map((v, i) => (
+                <div key={v.title} data-reveal style={d(i * 110)} className={`rounded-2xl p-6 text-white ${v.color}`}>
+                  <span className="mb-4 block h-1 w-10 rounded-full bg-brand-red" />
                   <span className="text-white/90">{v.icon}</span>
                   <h3 className="mt-3 text-xl font-bold">{v.title}</h3>
                   <p className="mt-2 text-sm leading-relaxed text-white/85">{v.text}</p>
@@ -271,7 +278,7 @@ export default function Home() {
           <div className="mx-auto grid max-w-6xl gap-10 px-5 lg:grid-cols-[1.3fr_1fr] lg:gap-12">
             <div>
               <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand-green sm:text-sm">Contact</p>
-              <h2 className="mt-3 text-2xl font-bold text-navy sm:text-4xl">Parlons de vos envois.</h2>
+              <h2 data-reveal className="mt-3 text-2xl font-bold text-navy sm:text-4xl">Parlons de vos envois.</h2>
               <p className="mt-4 max-w-xl text-navy/70">
                 Notre équipe vous répond au Canada et à Madagascar.
               </p>
@@ -280,6 +287,8 @@ export default function Home() {
                 {[company.canada, company.madagascar].map((o, i) => (
                   <div
                     key={o.label}
+                    data-reveal
+                    style={d(i * 130)}
                     className={`rounded-2xl border-t-4 bg-white p-6 ring-1 ring-navy/10 ${i === 0 ? "border-brand-red" : "border-brand-green"}`}
                   >
                     <p className="text-lg font-bold text-navy">{o.label}</p>
@@ -299,7 +308,7 @@ export default function Home() {
               <ul className="mt-6 space-y-3 text-navy">
                 <li className="flex items-center gap-3">
                   <span className="text-brand-green">{icons.mail}</span>
-                  <a href={`mailto:${company.email}`} className="break-all font-semibold hover:text-brand-red">
+                  <a href={`mailto:${company.email}`} className="break-all font-semibold hover:text-brand-green">
                     {company.email}
                   </a>
                 </li>
@@ -317,7 +326,7 @@ export default function Home() {
               </a>
             </div>
 
-            <div className="rounded-3xl bg-navy p-6 text-center text-white sm:p-8">
+            <div data-reveal style={d(150)} className="rounded-3xl bg-navy p-6 text-center text-white sm:p-8">
               <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand-green sm:text-sm">Restez connecté</p>
               <h3 className="mt-2 text-2xl font-bold">Scannez, retrouvez-nous.</h3>
               <p className="mx-auto mb-6 mt-2 max-w-xs text-sm text-white/70">
@@ -331,9 +340,9 @@ export default function Home() {
 
       <footer className="bg-navy pb-16 text-white md:pb-0">
         <div className="flex h-1.5">
-          <span className="flex-1 bg-white/20" />
-          <span className="flex-1 bg-brand-green" />
-          <span className="flex-1 bg-brand-red" />
+          <span className="flex-[6] bg-white/20" />
+          <span className="flex-[3] bg-brand-green" />
+          <span className="flex-[1] bg-brand-red" />
         </div>
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-5 py-8 text-center text-sm text-white/70 sm:flex-row sm:text-left">
           <Image
@@ -348,12 +357,13 @@ export default function Home() {
       </footer>
 
       {/* Barre d’actions mobile : la carte de visite à portée de pouce */}
+      <RevealInit />
       <div className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-3 border-t border-navy/10 bg-white text-xs font-semibold text-navy shadow-[0_-4px_20px_rgba(10,22,51,0.12)] md:hidden">
         <a href={phoneHref} className="flex flex-col items-center gap-1 py-2.5 active:bg-soft">
           <span className="text-brand-green [&>svg]:h-5 [&>svg]:w-5">{icons.phone}</span>Appeler
         </a>
         <a href={`mailto:${company.email}`} className="flex flex-col items-center gap-1 py-2.5 active:bg-soft">
-          <span className="text-brand-red [&>svg]:h-5 [&>svg]:w-5">{icons.mail}</span>E-mail
+          <span className="text-navy [&>svg]:h-5 [&>svg]:w-5">{icons.mail}</span>E-mail
         </a>
         <a href="/contact.vcf" className="flex flex-col items-center gap-1 py-2.5 active:bg-soft">
           <span className="text-navy [&>svg]:h-5 [&>svg]:w-5">{icons.handshake}</span>Contact
