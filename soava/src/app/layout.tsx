@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Space_Grotesk, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
+const geistSans = Space_Grotesk({
   variable: "--font-geist-sans",
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
 });
 
 const geistMono = Geist_Mono({
@@ -12,10 +13,20 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const title = "SOAVA Global Logistics — Beyond Borders";
+const description =
+  "Solutions logistiques entre le Canada et Madagascar : collecte, vérification, expédition internationale et suivi de vos colis, de bout en bout.";
+
 export const metadata: Metadata = {
-  title: "SOAVA Global Logistics — Suivi de colis Canada → Madagascar",
-  description:
-    "Achetez au Canada, suivez votre colis étape par étape jusqu'à Madagascar. Collecte, vérification, expédition et livraison en toute transparence.",
+  title,
+  description,
+  openGraph: {
+    title,
+    description,
+    siteName: "SOAVA Global Logistics",
+    locale: "fr_CA",
+    type: "website",
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

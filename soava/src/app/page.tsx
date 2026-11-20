@@ -1,243 +1,364 @@
 import Image from "next/image";
 import Tracker from "@/components/Tracker";
+import QrCard from "@/components/QrCard";
+import { company } from "@/lib/company";
 
-const steps = [
-  { n: "01", title: "Vous achetez", text: "Commandez vos produits chez vos marchands canadiens et faites-les livrer à un point de collecte SOAVA." },
-  { n: "02", title: "Nous collectons", text: "Nos équipes réceptionnent votre colis et l'enregistrent avec un numéro de suivi unique." },
-  { n: "03", title: "Nous vérifions", text: "Contrôle de conformité et de l'état du colis par l'équipe d'administration avant tout envoi." },
-  { n: "04", title: "Nous expédions", text: "Le colis est confié à un transporteur partenaire (DHL, FedEx…) pour la traversée vers Madagascar." },
-  { n: "05", title: "Vous recevez", text: "Suivez chaque étape en direct jusqu'à la livraison à Madagascar." },
+const icon = (d: React.ReactNode) => (
+  <svg
+    viewBox="0 0 24 24"
+    className="h-7 w-7"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.8"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden
+  >
+    {d}
+  </svg>
+);
+
+const icons = {
+  pin: icon(<><path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11z" /><circle cx="12" cy="10" r="2.5" /></>),
+  shield: icon(<><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z" /><path d="M9 12l2 2 4-4" /></>),
+  plane: icon(<path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5z" />),
+  box: icon(<><path d="M3 7l9-4 9 4v10l-9 4-9-4z" /><path d="M3 7l9 4 9-4M12 11v10" /></>),
+  eye: icon(<><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z" /><circle cx="12" cy="12" r="3" /></>),
+  handshake: icon(<><path d="M3 12l4-4 4 2 3-2 4 3 3-1" /><path d="M7 8v8l5 3 5-3v-5" /></>),
+  leaf: icon(<><path d="M5 19c0-8 5-14 15-14 0 10-6 15-14 15" /><path d="M5 19c3-5 6-8 10-10" /></>),
+  mail: icon(<><rect x="3" y="5" width="18" height="14" rx="2" /><path d="M3 7l9 6 9-6" /></>),
+  phone: icon(<path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z" />),
+  clock: icon(<><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></>),
+};
+
+const navLinks = [
+  ["#services", "Services"],
+  ["#reseau", "Notre réseau"],
+  ["#valeurs", "Valeurs"],
+  ["#contact", "Contact"],
 ];
 
-const pin = (<svg viewBox="0 0 24 24" className="h-8 w-8" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>);
-const shield = (<svg viewBox="0 0 24 24" className="h-8 w-8" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg>);
-const truck = (<svg viewBox="0 0 24 24" className="h-8 w-8" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg>);
-const bell = (<svg viewBox="0 0 24 24" className="h-8 w-8" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M6 16V11a6 6 0 1 1 12 0v5l2 2H4z"/><path d="M10 21h4"/></svg>);
+const highlights = [
+  { icon: icons.plane, title: "Canada ↔ Madagascar", text: "Une liaison dédiée entre les deux pays.", color: "bg-navy" },
+  { icon: icons.eye, title: "Suivi de bout en bout", text: "Votre colis visible à chaque étape.", color: "bg-brand-green" },
+  { icon: icons.shield, title: "Colis vérifiés", text: "Contrôle avant chaque expédition.", color: "bg-brand-red" },
+];
 
-const features = [
-  { icon: pin, title: "Suivi en temps réel", text: "Chaque changement de statut est visible instantanément dans votre espace." },
-  { icon: shield, title: "Colis vérifiés", text: "Des équipes dédiées contrôlent le contenu et l'état avant l'expédition." },
-  { icon: truck, title: "Transporteurs de confiance", text: "Nous travaillons avec des fournisseurs internationaux reconnus." },
-  { icon: bell, title: "Toujours informé", text: "Sachez où se trouve votre colis, sans avoir à nous écrire." },
+const services = [
+  {
+    icon: icons.pin,
+    title: "Collecte au Canada",
+    text: "Un réseau de points de collecte où vos achats sont réceptionnés, enregistrés et pris en charge dès leur arrivée.",
+  },
+  {
+    icon: icons.shield,
+    title: "Contrôle & vérification",
+    text: "Chaque colis est inspecté par nos équipes : conformité, état et contenu sont validés avant tout départ.",
+  },
+  {
+    icon: icons.plane,
+    title: "Transport international",
+    text: "Acheminement vers Madagascar avec des transporteurs internationaux de référence, sélectionnés pour leur fiabilité.",
+  },
+  {
+    icon: icons.box,
+    title: "Livraison à Madagascar",
+    text: "Prise en charge à l’arrivée, formalités et remise du colis à son destinataire.",
+  },
+];
+
+const network = ["Collecte", "Vérification", "Expédition", "Livraison"];
+
+const values = [
+  { icon: icons.shield, title: "Fiabilité", text: "Des processus rigoureux, de la réception à la remise finale.", color: "bg-navy" },
+  { icon: icons.eye, title: "Transparence", text: "Un statut clair à chaque étape, accessible à tout moment.", color: "bg-brand-green" },
+  { icon: icons.handshake, title: "Proximité", text: "Une équipe présente des deux côtés, à l’écoute de ses clients.", color: "bg-brand-red" },
+  { icon: icons.leaf, title: "Engagement", text: "Des racines canadiennes, un cap sur Madagascar : relier durablement deux pays.", color: "bg-navy" },
 ];
 
 export default function Home() {
+  const phoneHref = `tel:${company.canada.phone.replace(/\s/g, "")}`;
+
   return (
     <>
-      <header className="sticky top-0 z-30 border-b border-navy/10 bg-white/85 backdrop-blur">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-3">
-          <a href="#top" aria-label="SOAVA Global Logistics">
+      {/* Barre utilitaire (masquée sur très petit écran) */}
+      <div className="hidden bg-navy text-xs text-white/80 sm:block">
+        <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-2">
+          <span>Canada&nbsp;↔&nbsp;Madagascar</span>
+          <a href={`mailto:${company.email}`} className="hover:text-white">{company.email}</a>
+        </div>
+      </div>
+
+      <header className="sticky top-0 z-30 border-b border-navy/10 bg-white/90 backdrop-blur">
+        <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-2.5 sm:px-5 sm:py-3">
+          <a href="#top" aria-label="SOAVA Global Logistics" className="min-w-0">
             <Image
               src="/logo.jpg"
               alt="SOAVA Global Logistics Inc. — Beyond Borders"
               width={1600}
               height={533}
-              className="h-11 w-auto"
+              className="h-9 w-auto sm:h-11"
               preload
             />
           </a>
-          <nav className="hidden gap-7 text-sm font-medium text-navy/80 md:flex">
-            <a href="#suivi" className="hover:text-brand-green">Suivi</a>
-            <a href="#parcours" className="hover:text-brand-green">Parcours</a>
-            <a href="#roles" className="hover:text-brand-green">Espaces</a>
-            <a href="#avantages" className="hover:text-brand-green">Avantages</a>
+          <nav className="hidden gap-8 text-sm font-semibold text-navy md:flex">
+            {navLinks.map(([h, l]) => (
+              <a key={h} href={h} className="hover:text-brand-red">{l}</a>
+            ))}
           </nav>
-          <a href="#suivi" className="rounded-full bg-brand-red px-5 py-2 text-sm font-semibold text-white hover:brightness-110">
-            Suivre un colis
-          </a>
+          <div className="flex shrink-0 items-center gap-2">
+            <a href="#suivi" className="rounded-full bg-brand-red px-4 py-2 text-sm font-semibold text-white hover:brightness-110 sm:px-5">
+              Suivre un envoi
+            </a>
+            <details className="relative md:hidden">
+              <summary
+                aria-label="Menu"
+                className="grid h-10 w-10 cursor-pointer list-none place-items-center rounded-full bg-navy text-white [&::-webkit-details-marker]:hidden"
+              >
+                <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                  <path d="M4 7h16M4 12h16M4 17h16" />
+                </svg>
+              </summary>
+              <nav className="absolute right-0 top-12 w-56 overflow-hidden rounded-2xl bg-white text-sm font-semibold text-navy shadow-2xl ring-1 ring-navy/10">
+                {navLinks.map(([h, l]) => (
+                  <a key={h} href={h} className="block border-b border-navy/5 px-5 py-3.5 active:bg-soft">{l}</a>
+                ))}
+              </nav>
+            </details>
+          </div>
         </div>
       </header>
 
-      <main id="top">
+      <main id="top" className="overflow-x-clip">
         {/* Hero */}
-        <section className="relative overflow-hidden bg-gradient-to-b from-soft to-white">
-          <div className="mx-auto grid max-w-6xl items-center gap-12 px-5 pb-20 pt-16 lg:grid-cols-2">
+        <section className="relative bg-soft">
+          <div className="mx-auto grid max-w-6xl items-center gap-10 px-5 pb-14 pt-10 sm:gap-12 sm:pb-20 sm:pt-16 lg:grid-cols-[1.05fr_1fr]">
             <div>
-              <p className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-1.5 text-sm font-medium ring-1 ring-navy/10">
-                <span className="h-2 w-2 rounded-full bg-brand-green" /> Canada → Madagascar
+              <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand-green sm:text-sm">
+                Global Logistics
               </p>
-              <h1 className="mt-5 text-4xl font-bold leading-tight tracking-tight sm:text-5xl">
-                Votre colis, suivi
+              <h1 className="mt-4 text-[2.1rem] font-bold leading-[1.1] tracking-tight text-navy sm:text-5xl lg:text-[3.4rem]">
+                Le Canada et Madagascar,
                 <br />
-                <span className="text-brand-red">de Montréal</span> à{" "}
-                <span className="text-brand-green">Antananarivo</span>.
+                <span className="text-brand-red">sans frontières.</span>
               </h1>
-              <p className="mt-5 max-w-xl text-lg text-navy/70">
-                Achetez au Canada, nous nous occupons du reste : collecte, vérification, expédition.
-                Et vous suivez chaque étape du voyage, en toute transparence.
+              <p className="mt-5 max-w-xl text-base leading-relaxed text-navy/70 sm:mt-6 sm:text-lg">
+                SOAVA Global Logistics prend en charge vos colis de bout en bout : collecte,
+                contrôle, transport international et livraison, avec un suivi précis à chaque étape.
               </p>
-              <div className="mt-8 flex flex-wrap gap-3">
-                <a href="#suivi" className="rounded-full bg-navy px-7 py-3.5 font-semibold text-white hover:bg-navy/90">
-                  Suivre mon colis
+              <div className="mt-7 grid gap-3 min-[460px]:flex min-[460px]:flex-wrap">
+                <a href="#services" className="rounded-full bg-navy px-7 py-3.5 text-center font-semibold text-white hover:bg-navy/90">
+                  Découvrir nos services
                 </a>
-                <a href="#parcours" className="rounded-full px-7 py-3.5 font-semibold ring-1 ring-navy/20 hover:bg-white">
-                  Comment ça marche
+                <a href={phoneHref} className="rounded-full bg-white px-7 py-3.5 text-center font-semibold text-navy ring-1 ring-navy/20 hover:ring-navy/50">
+                  Nous contacter
                 </a>
               </div>
-              <dl className="mt-10 grid max-w-md grid-cols-3 gap-4">
-                {[
-                  ["5", "étapes suivies"],
-                  ["2", "pays reliés"],
-                  ["24/7", "suivi en ligne"],
-                ].map(([v, l]) => (
-                  <div key={l}>
-                    <dt className="text-2xl font-bold">{v}</dt>
-                    <dd className="text-sm text-navy/60">{l}</dd>
-                  </div>
-                ))}
-              </dl>
-            </div>
-
-            {/* Route visual */}
-            <div className="relative rounded-3xl bg-navy p-8 text-white shadow-2xl shadow-navy/30">
-              <Image
-                src="/emblem.png"
-                alt=""
-                width={540}
-                height={500}
-                className="absolute -right-4 -top-8 h-28 w-auto rotate-6 rounded-2xl bg-white p-2 shadow-xl"
-              />
-              <p className="text-sm uppercase tracking-widest text-white/60">Trajet type</p>
-              <div className="mt-8 flex items-center justify-between text-center">
-                <div>
-                  <p className="mx-auto grid h-12 w-12 place-items-center rounded-full bg-brand-red text-sm font-bold">CA</p>
-                  <p className="mt-1 font-semibold">Canada</p>
-                  <p className="text-xs text-white/60">Point de collecte</p>
-                </div>
-                <div className="relative mx-3 h-px flex-1 border-t-2 border-dashed border-white/40">
-                  <span
-                    className="absolute -top-3 text-xl"
-                    style={{ animation: "drive 4s ease-in-out infinite alternate" }}
-                  >
-                    <svg viewBox="0 0 24 24" className="h-6 w-6 text-white" fill="currentColor"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5z"/></svg>
+              <div className="mt-9 flex max-w-md items-center gap-3" aria-hidden>
+                <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-brand-red text-xs font-bold text-white">CA</span>
+                <span className="relative h-0 flex-1 border-t-2 border-dashed border-navy/30">
+                  <span className="absolute -top-3.5 left-1/2 -translate-x-1/2 rotate-90 rounded-full bg-soft p-0.5 text-navy">
+                    {icons.plane}
                   </span>
-                </div>
+                </span>
+                <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-brand-green text-xs font-bold text-white">MG</span>
+              </div>
+            </div>
+
+            <div id="suivi" className="scroll-mt-24">
+              <Tracker />
+              <p className="mt-3 text-center text-xs text-navy/50">
+                Aperçu du service de suivi — données de démonstration.
+              </p>
+            </div>
+          </div>
+          <div className="flex h-1.5">
+            <span className="flex-1 bg-navy" />
+            <span className="flex-1 bg-brand-green" />
+            <span className="flex-1 bg-brand-red" />
+          </div>
+        </section>
+
+        {/* En un coup d'œil */}
+        <section className="py-10 sm:py-14">
+          <div className="mx-auto grid max-w-6xl gap-4 px-5 sm:grid-cols-3">
+            {highlights.map((h) => (
+              <div key={h.title} className="flex items-center gap-4">
+                <span className={`grid h-14 w-14 shrink-0 place-items-center rounded-2xl text-white ${h.color}`}>
+                  {h.icon}
+                </span>
                 <div>
-                  <p className="mx-auto grid h-12 w-12 place-items-center rounded-full bg-brand-green text-sm font-bold">MG</p>
-                  <p className="mt-1 font-semibold">Madagascar</p>
-                  <p className="text-xs text-white/60">Livraison</p>
+                  <p className="font-bold text-navy">{h.title}</p>
+                  <p className="text-sm text-navy/60">{h.text}</p>
                 </div>
               </div>
-              <ul className="mt-10 space-y-3 text-sm">
-                {[
-                  "Collecte au point relais",
-                  "Vérification par nos équipes",
-                  "Transporteur partenaire",
-                  "Livraison finale",
-                ].map((t) => (
-                  <li key={t} className="flex items-center gap-3 rounded-xl bg-white/10 px-4 py-3">
-                    <span className="grid h-5 w-5 place-items-center rounded-full bg-brand-green text-[10px]">✓</span>
-                    {t}
-                  </li>
-                ))}
-              </ul>
-            </div>
+            ))}
           </div>
         </section>
 
-        {/* Tracker demo */}
-        <section id="suivi" className="scroll-mt-16 py-20">
-          <div className="mx-auto max-w-3xl px-5">
-            <h2 className="text-center text-3xl font-bold">Suivez votre colis</h2>
-            <p className="mt-3 text-center text-navy/70">
-              Saisissez votre numéro de suivi pour voir où se trouve votre colis.
-            </p>
-            <div className="mt-10">
-              <Tracker />
-            </div>
-            <p className="mt-4 text-center text-xs text-navy/50">Démonstration avec des données fictives.</p>
-          </div>
-        </section>
-
-        {/* Journey */}
-        <section id="parcours" className="scroll-mt-16 bg-soft py-20">
+        {/* Services */}
+        <section id="services" className="scroll-mt-20 bg-soft py-14 sm:py-20">
           <div className="mx-auto max-w-6xl px-5">
-            <h2 className="text-center text-3xl font-bold">Le parcours de votre colis</h2>
-            <p className="mx-auto mt-3 max-w-2xl text-center text-navy/70">
-              Cinq étapes simples, chacune visible dans votre espace client.
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand-green sm:text-sm">Nos services</p>
+            <h2 className="mt-3 max-w-2xl text-2xl font-bold text-navy sm:text-4xl">
+              Une chaîne logistique maîtrisée, d’un pays à l’autre.
+            </h2>
+            <div className="mt-8 grid gap-4 sm:mt-12 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">
+              {services.map((s) => (
+                <article
+                  key={s.title}
+                  className="group flex gap-4 rounded-2xl border border-navy/10 bg-white p-5 transition hover:-translate-y-1 hover:border-brand-green hover:shadow-xl sm:block sm:p-7"
+                >
+                  <span className="grid h-14 w-14 shrink-0 place-items-center self-start rounded-xl bg-navy text-white transition group-hover:bg-brand-green">
+                    {s.icon}
+                  </span>
+                  <div>
+                    <h3 className="text-lg font-bold text-navy sm:mt-5">{s.title}</h3>
+                    <p className="mt-1.5 text-sm leading-relaxed text-navy/70">{s.text}</p>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Réseau */}
+        <section id="reseau" className="scroll-mt-20 bg-navy py-14 text-white sm:py-20">
+          <div className="mx-auto max-w-6xl px-5">
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand-green sm:text-sm">Notre réseau</p>
+            <h2 className="mt-3 max-w-2xl text-2xl font-bold sm:text-4xl">
+              Deux pays, une seule équipe, un suivi continu.
+            </h2>
+            <p className="mt-4 max-w-2xl text-white/70">
+              Nos équipes d’administration opèrent au Canada comme à Madagascar et travaillent avec
+              des transporteurs internationaux partenaires pour garantir un acheminement sûr et traçable.
             </p>
-            <ol className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
-              {steps.map((s) => (
-                <li key={s.n} className="rounded-2xl bg-white p-6 ring-1 ring-navy/10">
-                  <span className="text-3xl font-bold text-brand-red/80">{s.n}</span>
-                  <h3 className="mt-3 font-semibold">{s.title}</h3>
-                  <p className="mt-2 text-sm text-navy/70">{s.text}</p>
+
+            <ol className="mt-8 grid grid-cols-2 gap-3 sm:mt-12 sm:gap-4 md:grid-cols-4">
+              {network.map((n, i) => (
+                <li key={n} className="rounded-2xl bg-white/5 p-4 ring-1 ring-white/10 sm:p-6">
+                  <span className="grid h-10 w-10 place-items-center rounded-full bg-brand-red text-sm font-bold">
+                    {i + 1}
+                  </span>
+                  <p className="mt-4 text-lg font-bold">{n}</p>
                 </li>
               ))}
             </ol>
           </div>
         </section>
 
-        {/* Roles */}
-        <section id="roles" className="scroll-mt-16 py-20">
+        {/* Valeurs */}
+        <section id="valeurs" className="scroll-mt-20 py-14 sm:py-20">
           <div className="mx-auto max-w-6xl px-5">
-            <h2 className="text-center text-3xl font-bold">Deux espaces, un seul objectif</h2>
-            <div className="mt-12 grid gap-6 md:grid-cols-2">
-              <div className="rounded-3xl border-t-4 border-brand-green p-8 ring-1 ring-navy/10">
-                <p className="text-sm font-semibold text-brand-green">ESPACE CLIENT</p>
-                <h3 className="mt-2 text-2xl font-bold">Je commande, je suis</h3>
-                <ul className="mt-5 space-y-3 text-navy/80">
-                  <li>✓ Voir tous mes colis en un coup d&apos;œil</li>
-                  <li>✓ Suivre l&apos;historique détaillé de chaque étape</li>
-                  <li>✓ Connaître le transporteur et la date estimée</li>
-                  <li>✓ Être informé de chaque changement de statut</li>
-                </ul>
-              </div>
-              <div className="rounded-3xl border-t-4 border-brand-red p-8 ring-1 ring-navy/10">
-                <p className="text-sm font-semibold text-brand-red">ESPACE ADMINISTRATEUR</p>
-                <h3 className="mt-2 text-2xl font-bold">Je gère, je vérifie</h3>
-                <ul className="mt-5 space-y-3 text-navy/80">
-                  <li>✓ Enregistrer les colis reçus aux points de collecte</li>
-                  <li>✓ Vérifier le contenu et l&apos;état des colis</li>
-                  <li>✓ Assigner un transporteur (DHL, FedEx…)</li>
-                  <li>✓ Mettre à jour les statuts tout au long du trajet</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Features */}
-        <section id="avantages" className="scroll-mt-16 bg-navy py-20 text-white">
-          <div className="mx-auto max-w-6xl px-5">
-            <h2 className="text-center text-3xl font-bold">Pourquoi SOAVA ?</h2>
-            <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-              {features.map((f) => (
-                <div key={f.title} className="rounded-2xl bg-white/5 p-6 ring-1 ring-white/10">
-                  <span className="inline-grid h-14 w-14 place-items-center rounded-xl bg-brand-green text-white">{f.icon}</span>
-                  <h3 className="mt-4 font-semibold">{f.title}</h3>
-                  <p className="mt-2 text-sm text-white/70">{f.text}</p>
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand-green sm:text-sm">Nos valeurs</p>
+            <h2 className="mt-3 max-w-2xl text-2xl font-bold text-navy sm:text-4xl">
+              Ce qui guide chacun de nos envois.
+            </h2>
+            <div className="mt-8 grid gap-4 sm:mt-12 sm:grid-cols-2 lg:grid-cols-4">
+              {values.map((v) => (
+                <div key={v.title} className={`rounded-2xl p-6 text-white ${v.color}`}>
+                  <span className="text-white/90">{v.icon}</span>
+                  <h3 className="mt-3 text-xl font-bold">{v.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-white/85">{v.text}</p>
                 </div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* CTA */}
-        <section className="py-20">
-          <div className="mx-auto max-w-4xl px-5 text-center">
-            <Image src="/emblem.png" alt="" width={540} height={500} className="mx-auto h-24 w-auto" />
-            <h2 className="mt-6 text-3xl font-bold">Prêt à voyager sans frontières ?</h2>
-            <p className="mt-3 text-navy/70">
-              Rejoignez SOAVA et suivez vos colis du Canada jusqu&apos;à Madagascar.
-            </p>
-            <a href="#suivi" className="mt-8 inline-block rounded-full bg-brand-red px-8 py-3.5 font-semibold text-white hover:brightness-110">
-              Essayer le suivi
-            </a>
+        {/* Contact + QR */}
+        <section id="contact" className="scroll-mt-20 bg-soft py-14 sm:py-20">
+          <div className="mx-auto grid max-w-6xl gap-10 px-5 lg:grid-cols-[1.3fr_1fr] lg:gap-12">
+            <div>
+              <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand-green sm:text-sm">Contact</p>
+              <h2 className="mt-3 text-2xl font-bold text-navy sm:text-4xl">Parlons de vos envois.</h2>
+              <p className="mt-4 max-w-xl text-navy/70">
+                Notre équipe vous répond au Canada et à Madagascar.
+              </p>
+
+              <div className="mt-8 grid gap-4 sm:grid-cols-2 sm:gap-5">
+                {[company.canada, company.madagascar].map((o, i) => (
+                  <div
+                    key={o.label}
+                    className={`rounded-2xl border-t-4 bg-white p-6 ring-1 ring-navy/10 ${i === 0 ? "border-brand-red" : "border-brand-green"}`}
+                  >
+                    <p className="text-lg font-bold text-navy">{o.label}</p>
+                    <p className="text-sm text-navy/60">{o.city}</p>
+                    <a
+                      href={`tel:${o.phone.replace(/\s/g, "")}`}
+                      className="mt-4 flex items-center gap-3 text-sm font-semibold text-navy"
+                    >
+                      <span className="text-brand-green">{icons.phone}</span>
+                      {o.phone}
+                    </a>
+                    <p className="mt-2 text-sm text-navy/70">{o.address}</p>
+                  </div>
+                ))}
+              </div>
+
+              <ul className="mt-6 space-y-3 text-navy">
+                <li className="flex items-center gap-3">
+                  <span className="text-brand-green">{icons.mail}</span>
+                  <a href={`mailto:${company.email}`} className="break-all font-semibold hover:text-brand-red">
+                    {company.email}
+                  </a>
+                </li>
+                <li className="flex items-center gap-3">
+                  <span className="text-brand-green">{icons.clock}</span>
+                  {company.hours}
+                </li>
+              </ul>
+
+              <a
+                href="/contact.vcf"
+                className="mt-8 block rounded-full bg-navy px-7 py-3.5 text-center font-semibold text-white hover:bg-navy/90 sm:inline-block"
+              >
+                Ajouter SOAVA à mes contacts
+              </a>
+            </div>
+
+            <div className="rounded-3xl bg-navy p-6 text-center text-white sm:p-8">
+              <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand-green sm:text-sm">Restez connecté</p>
+              <h3 className="mt-2 text-2xl font-bold">Scannez, retrouvez-nous.</h3>
+              <p className="mx-auto mb-6 mt-2 max-w-xs text-sm text-white/70">
+                Enregistrez ce site pour plus tard grâce à ce QR code.
+              </p>
+              <QrCard />
+            </div>
           </div>
         </section>
       </main>
 
-      <footer className="border-t border-navy/10 py-8 text-center text-sm text-navy/60">
-        <Image
-          src="/logo.jpg"
-          alt="SOAVA Global Logistics"
-          width={1600}
-          height={533}
-          className="mx-auto mb-3 h-10 w-auto"
-        />
-        © 2026 SOAVA Global Logistics Inc. — Beyond Borders
+      <footer className="bg-navy pb-16 text-white md:pb-0">
+        <div className="flex h-1.5">
+          <span className="flex-1 bg-white/20" />
+          <span className="flex-1 bg-brand-green" />
+          <span className="flex-1 bg-brand-red" />
+        </div>
+        <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-5 py-8 text-center text-sm text-white/70 sm:flex-row sm:text-left">
+          <Image
+            src="/emblem.png"
+            alt="SOAVA"
+            width={540}
+            height={500}
+            className="h-12 w-auto rounded-lg bg-white p-1"
+          />
+          <p>© 2026 {company.name} — {company.tagline}</p>
+        </div>
       </footer>
+
+      {/* Barre d’actions mobile : la carte de visite à portée de pouce */}
+      <div className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-3 border-t border-navy/10 bg-white text-xs font-semibold text-navy shadow-[0_-4px_20px_rgba(10,22,51,0.12)] md:hidden">
+        <a href={phoneHref} className="flex flex-col items-center gap-1 py-2.5 active:bg-soft">
+          <span className="text-brand-green [&>svg]:h-5 [&>svg]:w-5">{icons.phone}</span>Appeler
+        </a>
+        <a href={`mailto:${company.email}`} className="flex flex-col items-center gap-1 py-2.5 active:bg-soft">
+          <span className="text-brand-red [&>svg]:h-5 [&>svg]:w-5">{icons.mail}</span>E-mail
+        </a>
+        <a href="/contact.vcf" className="flex flex-col items-center gap-1 py-2.5 active:bg-soft">
+          <span className="text-navy [&>svg]:h-5 [&>svg]:w-5">{icons.handshake}</span>Contact
+        </a>
+      </div>
     </>
   );
 }
