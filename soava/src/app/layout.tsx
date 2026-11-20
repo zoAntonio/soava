@@ -22,7 +22,7 @@ const mono = Geist_Mono({
 
 const title = "SOAVA Global Logistics : colis du Canada vers Madagascar";
 const description =
-  "SOAVA collecte vos achats au Canada, les vérifie, les expédie vers Madagascar et vous montre où ils sont à chaque étape.";
+  "SOAVA collecte vos achats au Canada, les vérifie, les expédie vers Madagascar et les remet à leur destinataire. Contactez notre équipe au Canada ou à Madagascar.";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
 

@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Tracker from "@/components/Tracker";
 import QrCard from "@/components/QrCard";
 import { company } from "@/lib/company";
 
@@ -44,7 +43,7 @@ const services = [
   },
   {
     title: "Transport international",
-    text: "Le colis voyage avec un transporteur international partenaire. Son statut est mis à jour tout au long du trajet.",
+    text: "Le colis voyage avec un transporteur international partenaire, choisi pour sa fiabilité sur cette liaison.",
   },
   {
     title: "Livraison à Madagascar",
@@ -54,7 +53,7 @@ const services = [
 
 const values = [
   { title: "Fiabilité", text: "Chaque colis suit les mêmes contrôles, de la réception à la remise." },
-  { title: "Transparence", text: "Vous connaissez le statut de votre colis sans avoir à nous écrire." },
+  { title: "Transparence", text: "Nous vous tenons informé de l'avancement de votre colis, étape après étape." },
   { title: "Proximité", text: "Une équipe au Canada, une équipe à Madagascar, joignables des deux côtés." },
   { title: "Engagement", text: "Nous voulons relier durablement deux pays, un colis après l'autre." },
 ];
@@ -118,20 +117,17 @@ export default function Home() {
             <div className="self-center">
               <h1 className="text-[2.15rem] font-extrabold leading-[1.08] text-navy sm:text-5xl lg:text-[3.3rem]">
                 Vos colis du <span className="text-brand-red">Canada</span> à{" "}
-                <span className="text-green-ink">Madagascar</span>, suivis à chaque étape.
+                <span className="text-green-ink">Madagascar</span>, pris en charge de bout en bout.
               </h1>
               <p className="mt-6 max-w-xl text-base leading-relaxed text-navy/75 sm:text-lg">
                 SOAVA reçoit vos achats au Canada, les vérifie, les confie à un transporteur
-                international et les remet à Madagascar. Vous voyez où ils sont à tout moment.
+                international et les remet à Madagascar. Une équipe vous répond des deux côtés.
               </p>
               <div className="mt-8 flex flex-col gap-3 min-[460px]:flex-row">
-                <a href="#suivi" className="rounded-md bg-navy px-7 py-3.5 text-center font-semibold text-white hover:bg-navy/90">
-                  Suivre un colis
+                <a href="#contact" className="rounded-md bg-navy px-7 py-3.5 text-center font-semibold text-white hover:bg-navy/90">
+                  Nous contacter
                 </a>
-                <a href={phoneHref} className="rounded-md border-2 border-navy px-7 py-3.5 text-center font-semibold text-navy hover:bg-navy hover:text-white">
-                  Nous appeler
-                </a>
-              </div>
+                </div>
               <div className="mt-10 flex max-w-md items-center gap-3 text-sm font-semibold text-navy" aria-label="Trajet de Montréal à Antananarivo">
                 <span>Montréal</span>
                 <span className="flex flex-1 items-center gap-2 text-navy/40" aria-hidden>
@@ -143,9 +139,26 @@ export default function Home() {
               </div>
             </div>
 
-            <div id="suivi" className="scroll-mt-24">
-              <Tracker />
-            </div>
+            <aside aria-labelledby="direct-titre" className="rounded-xl border border-navy/20 bg-white p-6 sm:p-8">
+              <h2 id="direct-titre" className="text-lg font-bold text-navy">Joignez-nous directement</h2>
+              <div className="mt-6 space-y-6">
+                {[company.canada, company.madagascar].map((o, i) => (
+                  <div key={o.label} className={`border-l-4 pl-4 ${i === 0 ? "border-brand-red" : "border-brand-green"}`}>
+                    <p className="font-bold text-navy">{o.label}</p>
+                    <p className="text-sm text-navy/70">{o.city}</p>
+                    <a href={`tel:${o.phone.replace(/s/g, "")}`} className="mt-1 inline-block text-lg font-semibold text-navy underline underline-offset-4 hover:text-green-ink">
+                      {o.phone}
+                    </a>
+                  </div>
+                ))}
+              </div>
+              <a href={`mailto:${company.email}`} className="mt-6 block break-all font-semibold text-navy underline underline-offset-4 hover:text-green-ink">
+                {company.email}
+              </a>
+              <a href="/contact.vcf" className="mt-6 block rounded-md bg-navy px-6 py-3 text-center font-semibold text-white hover:bg-navy/90">
+                Ajouter SOAVA à mes contacts
+              </a>
+            </aside>
           </div>
         </section>
 
@@ -184,7 +197,7 @@ export default function Home() {
               <p className="self-end leading-relaxed text-white/80">
                 Nos équipes d&apos;administration travaillent au Canada et à Madagascar. Elles
                 s&apos;appuient sur des transporteurs internationaux partenaires pour que chaque colis
-                arrive en bon état, et que son parcours reste visible de bout en bout.
+                arrive en bon état et que chaque étape du trajet soit contrôlée.
               </p>
             </div>
 
