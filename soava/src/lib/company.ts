@@ -1,6 +1,6 @@
 // Informations de l'entreprise. Seul fichier à modifier pour mettre à jour
 // les contacts affichés sur le site et dans la fiche contact (.vcf).
-// Le courriel et les horaires sont encore des valeurs d'exemple à remplacer.
+// Le courriel et les adresses sont les coordonnées réelles de Soava.
 
 type Office = {
   label: string;
@@ -42,9 +42,8 @@ export const company = {
   name: "SOAVA Global Logistics Inc.",
   shortName: "SOAVA",
   tagline: "Beyond Borders",
-  email: "contact@soava.example",
+  email: "falitianandisa@gmail.com",
   offices,
-  hours: "Lundi – Vendredi · 9 h – 17 h",
 };
 
 export const addressLine = (o: Office) => `${o.street}, ${o.city}, ${o.region} ${o.postal}`;

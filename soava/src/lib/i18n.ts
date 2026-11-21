@@ -39,7 +39,6 @@ export type Dict = {
     text: string;
     locations: string;
     offices: string;
-    hours: string;
     addToContacts: string;
     qrTitle: string;
     qrText: string;
@@ -58,7 +57,7 @@ export const dict: Record<Lang, Dict> = {
       home: {
         title: "Soava Group : une entreprise canadienne à ambition mondiale",
         description:
-          "Soava Group, ancré au Canada, réunit logistique et livraison express, agroalimentaire et superfoods, mines et ressources stratégiques.",
+          "Soava Group, entreprise fondée et basée en Ontario, réunit logistique et livraison express, agroalimentaire et superfoods, mines et ressources stratégiques.",
       },
       about: {
         title: "À propos | Soava Group",
@@ -78,7 +77,7 @@ export const dict: Record<Lang, Dict> = {
     hero: {
       eyebrow: "Soava Group · Beyond Borders",
       title: "Une entreprise canadienne portée par une ambition mondiale",
-      text: "Ancré au Canada avec une orientation commerciale internationale, Soava Group s'engage avec rigueur, fiabilité et un souci total du service client.",
+      text: "Fondé et basé en Ontario, Soava Group s'appuie sur une orientation commerciale internationale, avec rigueur, fiabilité et un souci total du service client.",
       featured: "Soava Express",
       tag: "Pôle d'activité",
       featuredText:
@@ -87,8 +86,8 @@ export const dict: Record<Lang, Dict> = {
     about: {
       eyebrow: "Notre entreprise",
       title: "Une entreprise canadienne portée par une ambition mondiale",
-      text: "Ancré au Canada avec une orientation commerciale internationale, Soava Group déploie une ambition mondiale fondée sur la rigueur, la fiabilité et un engagement total envers le service client.",
-      badge: "Canada",
+      text: "Fondé et basé en Ontario, Soava Group déploie une ambition mondiale fondée sur la rigueur, la fiabilité et un engagement total envers le service client.",
+      badge: "Fondé en Ontario",
       storyEyebrow: "Notre vision et notre mission",
       storyTitle: "Pourquoi nous existons",
       vision: "Notre vision",
@@ -153,7 +152,6 @@ export const dict: Record<Lang, Dict> = {
       text: "Pour un envoi, un partenariat ou une question sur nos pôles d'activités, écrivez-nous ou appelez le bureau le plus proche de vous.",
       locations: "Nos bureaux",
       offices: "Bureaux",
-      hours: "Lundi – Vendredi · 9 h – 17 h",
       addToContacts: "Ajouter Soava à mes contacts",
       qrTitle: "Retrouvez-nous plus tard",
       qrText: "Scannez ce code avec votre téléphone pour enregistrer le site.",
@@ -161,7 +159,7 @@ export const dict: Record<Lang, Dict> = {
       qrDownload: "Télécharger le QR code",
     },
     footer: {
-      tagline: "Soava Group, ancré au Canada, tourné vers le monde.",
+      tagline: "Soava Group, fondé et basé en Ontario, tourné vers le monde.",
       offices: "Bureaux",
       navigate: "Navigation",
       rights: "Tous droits réservés.",
@@ -175,7 +173,7 @@ export const dict: Record<Lang, Dict> = {
       home: {
         title: "Soava Group: a Canadian enterprise driven by global ambition",
         description:
-          "Soava Group, grounded in Canada, brings together express logistics and delivery, agri-food and superfoods, mining and strategic resources.",
+          "Soava Group, a company founded and based in Ontario, brings together express logistics and delivery, agri-food and superfoods, mining and strategic resources.",
       },
       about: {
         title: "About | Soava Group",
@@ -195,7 +193,7 @@ export const dict: Record<Lang, Dict> = {
     hero: {
       eyebrow: "Soava Group · Beyond Borders",
       title: "A Canadian Enterprise Driven by Global Ambition",
-      text: "Grounded in Canada with a strong international business orientation, Soava Group is committed to rigor, reliability and customer service.",
+      text: "Founded and based in Ontario, Soava Group builds on a strong international business orientation, with rigor, reliability and a full commitment to customer service.",
       featured: "Soava Express",
       tag: "Division",
       featuredText:
@@ -204,8 +202,8 @@ export const dict: Record<Lang, Dict> = {
     about: {
       eyebrow: "Our company",
       title: "A Canadian Enterprise Driven by Global Ambition",
-      text: "Grounded in our Canadian identity with a strong international business orientation, Soava Group combines global commercial ambition with an unwavering commitment to customer service.",
-      badge: "Canada",
+      text: "Founded and based in Ontario, Soava Group combines global commercial ambition with an unwavering commitment to customer service.",
+      badge: "Founded in Ontario",
       storyEyebrow: "Our vision and mission",
       storyTitle: "Why we exist",
       vision: "Our vision",
@@ -270,7 +268,6 @@ export const dict: Record<Lang, Dict> = {
       text: "For a shipment, a partnership or a question about our divisions, write to us or call the office closest to you.",
       locations: "Our locations",
       offices: "Offices",
-      hours: "Monday – Friday · 9 am – 5 pm",
       addToContacts: "Add Soava to my contacts",
       qrTitle: "Find us later",
       qrText: "Scan this code with your phone to save the site.",
@@ -278,7 +275,7 @@ export const dict: Record<Lang, Dict> = {
       qrDownload: "Download the QR code",
     },
     footer: {
-      tagline: "Soava Group, grounded in Canada, facing the world.",
+      tagline: "Soava Group, founded and based in Ontario, facing the world.",
       offices: "Offices",
       navigate: "Navigate",
       rights: "All rights reserved.",

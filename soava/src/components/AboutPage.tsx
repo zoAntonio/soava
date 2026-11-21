@@ -19,7 +19,7 @@ export default function AboutPage({ lang }: { lang: Lang }) {
             {t.cta.contact}
           </Link>
         </div>
-        <Visual src="/photos/montreal.jpg" className="min-h-[22rem] lg:min-h-[32rem]">
+        <Visual src="/photos/ottawa.jpg" className="min-h-[22rem] lg:min-h-[32rem]">
           <span className="absolute bottom-4 right-4 rounded-full bg-white/90 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-navy">
             {t.about.badge}
           </span>

@@ -23,7 +23,7 @@ const mono = Geist_Mono({
 
 const title = "Soava Group : une entreprise canadienne à ambition mondiale";
 const description =
-  "Soava Group, ancré au Canada, réunit logistique et livraison express, agroalimentaire et superfoods, mines et ressources stratégiques.";
+  "Soava Group, entreprise fondée et basée en Ontario, réunit logistique et livraison express, agroalimentaire et superfoods, mines et ressources stratégiques.";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
 

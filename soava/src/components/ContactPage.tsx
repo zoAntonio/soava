@@ -38,10 +38,6 @@ export default function ContactPage({ lang }: { lang: Lang }) {
             {icons.mail}
             <a href={`mailto:${company.email}`} className="break-all font-semibold hover:underline">{company.email}</a>
           </li>
-          <li className="flex items-center gap-3 text-body">
-            {icons.clock}
-            {t.contactPage.hours}
-          </li>
         </ul>
       </section>
 
