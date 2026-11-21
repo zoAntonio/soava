@@ -9,7 +9,7 @@ export const metadata = {
 export default function NotFound() {
   return (
     <main className="mx-auto flex min-h-screen max-w-xl flex-col items-start justify-center px-6 py-16">
-      <Image src="/logo-soava.png" alt="SOAVA Global Logistics Inc." width={1385} height={402} className="h-12 w-auto" />
+      <Image src="/logo-soava-couleur.png" alt="SOAVA Global Logistics Inc." width={1385} height={402} className="h-12 w-auto" />
       <p className="mt-12 font-heading text-sm font-bold uppercase tracking-[0.18em] text-green-ink">Erreur 404</p>
       <h1 className="mt-3 text-4xl font-extrabold text-navy">Ce colis s&apos;est égaré.</h1>
       <p className="mt-4 text-lg text-navy/75">

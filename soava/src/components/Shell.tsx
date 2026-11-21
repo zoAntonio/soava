@@ -123,7 +123,7 @@ export default function Shell({
       <header className="sticky top-3 z-30 px-3 pt-3 sm:px-6">
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 rounded-2xl bg-tint px-4 py-2.5 shadow-sm sm:px-6">
           <Link href={routeHref(lang, "home")} aria-label={t.logoAlt} className="shrink-0">
-            <Image src="/logo-soava.png" alt={t.logoAlt} width={1385} height={402} className="h-9 w-auto sm:h-11" preload />
+            <Image src="/logo-soava-couleur.png" alt={t.logoAlt} width={1385} height={402} className="h-9 w-auto sm:h-11" preload />
           </Link>
           <nav aria-label="Navigation" className="ml-auto mr-4 hidden gap-8 text-sm font-semibold text-navy md:flex">
             {nav.map((n) => (
