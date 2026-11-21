@@ -123,7 +123,7 @@ export default function Shell({
       <header className="sticky top-3 z-30 px-3 pt-3 sm:px-6">
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 rounded-2xl bg-tint px-4 py-2.5 shadow-sm sm:px-6">
           <Link href={routeHref(lang, "home")} aria-label={t.logoAlt} className="shrink-0">
-            <Image src="/logo.png" alt={t.logoAlt} width={1530} height={441} className="h-9 w-auto sm:h-11" preload />
+            <Image src="/logo-soava-couleur.png" alt={t.logoAlt} width={1385} height={402} className="h-9 w-auto sm:h-11" preload />
           </Link>
           <nav aria-label="Navigation" className="ml-auto mr-4 hidden gap-8 text-sm font-semibold text-navy md:flex">
             {nav.map((n) => (
@@ -167,7 +167,7 @@ export default function Shell({
         <div className="mx-auto max-w-6xl overflow-hidden rounded-2xl bg-navy text-white">
           <div className="grid gap-10 p-6 text-sm text-mist sm:p-10 md:grid-cols-[1.3fr_1fr_1fr] md:gap-0">
             <div className="md:border-r md:border-white/[0.12] md:pr-10">
-              <Image src="/logo-white.png" alt={t.logoAlt} width={1530} height={441} className="h-11 w-auto" />
+              <Image src="/logo-soava-blanc.png" alt={t.logoAlt} width={1332} height={362} className="h-11 w-auto" />
               <p className="mt-4 max-w-xs">{t.footer.tagline}</p>
             </div>
             <div className="md:px-10">

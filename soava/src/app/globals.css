@@ -13,11 +13,11 @@
   --body: #475569; /* gris ardoise : texte courant */
   --line: #e2e8f0; /* gris perle : bordures fines */
   --mist: #cbd5e1; /* gris clair : texte courant sur fond sombre */
-  --cta: #0f7b58; /* vert émeraude : bouton d'action sur fond clair, texte blanc */
-  --cta-bright: #10b981; /* émeraude lumineux : bouton d'action sur fond sombre, texte bleu nuit */
-  --red: #e30200; /* rouge du logo : touche rare */
-  --green: #10b981;
-  --green-ink: #0f7b58;
+  --cta: #0c7b5a; /* vert de la feuille du logo : bouton d'action sur fond clair, texte blanc */
+  --cta-bright: #1eb88a; /* même vert éclairci : bouton d'action sur fond sombre, texte bleu nuit */
+  --red: #bd0201; /* rouge de la feuille d'érable du logo : touche rare */
+  --green: #1eb88a;
+  --green-ink: #0c7b5a;
   --tint: #f6f8fa;
 }
 
