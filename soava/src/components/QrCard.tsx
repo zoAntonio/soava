@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import QRCode from "qrcode";
 
 // QR code généré à partir de l'adresse réelle du site (marche en local comme en ligne).
-export default function QrCard() {
+export default function QrCard({ alt, download }: { alt: string; download: string }) {
   const [url, setUrl] = useState("");
   const [png, setPng] = useState("");
 
@@ -21,10 +21,10 @@ export default function QrCard() {
 
   return (
     <div className="flex flex-col items-center text-navy">
-      <div className="grid h-52 w-52 place-items-center rounded-md border border-navy/20">
+      <div className="grid h-52 w-52 place-items-center rounded-xl border border-navy/20">
         {png ? (
           // eslint-disable-next-line @next/next/no-img-element
-          <img src={png} alt="QR code vers le site SOAVA" className="h-full w-full" />
+          <img src={png} alt={alt} className="h-full w-full" />
         ) : (
           <span className="text-sm text-navy/40">…</span>
         )}
@@ -34,9 +34,9 @@ export default function QrCard() {
         <a
           href={png}
           download="soava-qr.png"
-          className="mt-4 rounded-md bg-navy px-5 py-2.5 text-sm font-semibold text-white hover:bg-navy/90"
+          className="mt-4 rounded-full bg-navy px-5 py-2.5 text-sm font-semibold text-white hover:bg-navy/90"
         >
-          Télécharger le QR code
+          {download}
         </a>
       )}
     </div>

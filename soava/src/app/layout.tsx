@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Montserrat, Public_Sans, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -7,7 +8,7 @@ import "./globals.css";
 const head = Montserrat({
   variable: "--font-head",
   subsets: ["latin"],
-  weight: ["600", "700", "800"],
+  weight: ["300", "400", "500", "600", "700"],
 });
 
 const body = Public_Sans({
@@ -43,8 +44,15 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="fr"
+      suppressHydrationWarning
       className={`${head.variable} ${body.variable} ${mono.variable} h-full antialiased`}
     >
+      <head>
+        <Script id="js-reveal" strategy="beforeInteractive">{"document.documentElement.classList.add(\"js-reveal\")"}</Script>
+        <noscript>
+          <style>{"[data-reveal]{opacity:1!important;transform:none!important}"}</style>
+        </noscript>
+      </head>
       <body className="flex min-h-full flex-col">{children}</body>
     </html>
   );
