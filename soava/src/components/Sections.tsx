@@ -49,7 +49,7 @@ export function Visual({
         <Image src={src} alt={alt} fill sizes="(min-width: 1024px) 50vw, 100vw" quality={90} className="object-cover" />
       ) : (
         <>
-          <Image src="/emblem.png" alt="" width={320} height={320} className="absolute left-1/2 top-[40%] h-2/5 max-h-60 w-auto -translate-x-1/2 -translate-y-1/2" />
+          <Image src="/emblem-soava.png" alt="" width={320} height={320} className="absolute left-1/2 top-[40%] h-2/5 max-h-60 w-auto -translate-x-1/2 -translate-y-1/2" />
           <div className="absolute inset-x-0 bottom-0 flex h-1.5">
             <span className="flex-1 bg-brand-red" />
             <span className="flex-1 bg-brand-green" />
