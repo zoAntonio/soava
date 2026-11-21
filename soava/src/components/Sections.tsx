@@ -46,7 +46,7 @@ export function Visual({
   return (
     <div data-reveal className={`relative overflow-hidden rounded-2xl bg-tint ${className}`}>
       {src ? (
-        <Image src={src} alt={alt} fill sizes="(min-width: 1024px) 50vw, 100vw" className="object-cover" />
+        <Image src={src} alt={alt} fill sizes="(min-width: 1024px) 50vw, 100vw" quality={90} className="object-cover" />
       ) : (
         <>
           <Image src="/emblem.png" alt="" width={320} height={320} className="absolute left-1/2 top-[40%] h-2/5 max-h-60 w-auto -translate-x-1/2 -translate-y-1/2" />
@@ -68,7 +68,7 @@ export function Divisions({ lang }: { lang: Lang }) {
       <Eyebrow>{t.eyebrow}</Eyebrow>
       <Heading className="max-w-3xl">{t.title}</Heading>
       <div className="mt-10 grid overflow-hidden rounded-2xl border border-navy/15 bg-white sm:mt-14 md:grid-cols-[1fr_1.7fr]">
-        <Visual className="min-h-56 rounded-none md:min-h-full" />
+        <Visual src="/photos/batiment.jpg" className="min-h-56 rounded-none md:min-h-full" />
         <ol className="divide-y divide-navy/15">
           {t.items.map((d, i) => (
             <li key={d.title} data-reveal style={{ ["--d" as string]: `${i * 90}ms` }} className="p-6 sm:p-8">
@@ -90,7 +90,7 @@ export function Values({ lang }: { lang: Lang }) {
       <Eyebrow>{t.eyebrow}</Eyebrow>
       <Heading className="max-w-xl">{t.title}</Heading>
       <div className="mt-10 grid overflow-hidden rounded-2xl border border-navy/15 bg-white sm:mt-14 md:grid-cols-[1fr_1.9fr]">
-        <Visual className="min-h-56 rounded-none md:min-h-full" />
+        <Visual src="/photos/echange.jpg" className="min-h-56 rounded-none md:min-h-full" />
         <ol className="grid sm:grid-cols-2">
           {t.items.map((v, i) => (
             <li key={v.title} data-reveal style={{ ["--d" as string]: `${i * 90}ms` }} className="border-b border-navy/15 p-6 last:border-b-0 sm:p-8 sm:odd:border-r sm:[&:nth-last-child(2)]:border-b-0">
