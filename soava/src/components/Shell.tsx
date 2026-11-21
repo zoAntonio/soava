@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import LangSync from "@/components/LangSync";
 import RevealInit from "@/components/RevealInit";
-import { company } from "@/lib/company";
+import { addressLine, company, telHref } from "@/lib/company";
 import { dict, routeHref, type Lang, type Route } from "@/lib/i18n";
 
 const icon = (d: React.ReactNode) => (
@@ -27,7 +27,7 @@ export const icons = {
   card: icon(<><rect x="3" y="5" width="18" height="14" rx="2" /><circle cx="9" cy="11" r="2" /><path d="M6 16c.5-1.5 1.7-2 3-2s2.5.5 3 2M15 10h3M15 13h3" /></>),
 };
 
-export const tel = (p: string) => `tel:${p.replace(/\s/g, "")}`;
+export const tel = telHref;
 
 function Flag({ lang }: { lang: Lang }) {
   return (
@@ -71,7 +71,7 @@ function LangSwitch({ lang, route, label }: { lang: Lang; route: Route; label: s
           <path d="M6 9l6 6 6-6" />
         </svg>
       </summary>
-      <ul className="absolute right-0 top-12 z-40 w-28 overflow-hidden rounded-xl border border-navy/15 bg-white text-sm font-semibold text-navy shadow-lg">
+      <ul className="absolute right-0 top-12 z-40 w-28 overflow-hidden rounded-xl border border-line bg-white text-sm font-semibold text-navy shadow-lg">
         {(["fr", "en"] as const).map((l) => (
           <li key={l}>
             <Link
@@ -101,7 +101,7 @@ export default function Shell({
   children: React.ReactNode;
 }) {
   const t = dict[lang];
-  const offices = [company.canada, company.madagascar];
+  const offices = company.offices;
   const nav = [
     { key: "poles", href: routeHref(lang, "home", "#poles"), label: t.nav.poles },
     { key: "about", href: routeHref(lang, "about"), label: t.nav.about },
@@ -123,7 +123,7 @@ export default function Shell({
       <header className="sticky top-3 z-30 px-3 pt-3 sm:px-6">
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 rounded-2xl bg-tint px-4 py-2.5 shadow-sm sm:px-6">
           <Link href={routeHref(lang, "home")} aria-label={t.logoAlt} className="shrink-0">
-            <Image src="/logo.jpg" alt={t.logoAlt} width={1600} height={533} className="h-9 w-auto sm:h-11" preload />
+            <Image src="/logo.png" alt={t.logoAlt} width={1530} height={441} className="h-9 w-auto sm:h-11" preload />
           </Link>
           <nav aria-label="Navigation" className="ml-auto mr-4 hidden gap-8 text-sm font-semibold text-navy md:flex">
             {nav.map((n) => (
@@ -138,7 +138,7 @@ export default function Shell({
             ))}
           </nav>
           <LangSwitch lang={lang} route={route} label={t.switchLabel} />
-          <Link href={contactHref} className="hidden rounded-full bg-navy px-5 py-2.5 text-sm font-semibold text-white hover:bg-navy/90 md:inline-block">
+          <Link href={contactHref} className="hidden rounded-full bg-cta px-5 py-2.5 text-sm font-semibold text-white hover:bg-cta/90 md:inline-block">
             {t.cta.contact}
           </Link>
           <details className="relative md:hidden">
@@ -150,7 +150,7 @@ export default function Shell({
                 <path d="M4 7h16M4 12h16M4 17h16" />
               </svg>
             </summary>
-            <nav aria-label="Menu" className="absolute right-0 top-12 w-56 overflow-hidden rounded-xl border border-navy/15 bg-white text-sm font-semibold text-navy shadow-lg">
+            <nav aria-label="Menu" className="absolute right-0 top-12 w-56 overflow-hidden rounded-xl border border-line bg-white text-sm font-semibold text-navy shadow-lg">
               {nav.map((n) => (
                 <Link key={n.key} href={n.href} className="block border-b border-navy/10 px-5 py-3.5 last:border-0 active:bg-navy/5">
                   {n.label}
@@ -165,11 +165,9 @@ export default function Shell({
 
       <footer className="px-3 pb-6 sm:px-6">
         <div className="mx-auto max-w-6xl overflow-hidden rounded-2xl bg-navy text-white">
-          <div className="grid gap-10 p-6 text-sm text-white/75 sm:p-10 md:grid-cols-[1.3fr_1fr_1fr] md:gap-0">
-            <div className="md:border-r md:border-white/15 md:pr-10">
-              <span className="inline-block rounded-lg bg-white px-3 py-2">
-                <Image src="/logo.jpg" alt={t.logoAlt} width={1600} height={533} className="h-9 w-auto" />
-              </span>
+          <div className="grid gap-10 p-6 text-sm text-mist sm:p-10 md:grid-cols-[1.3fr_1fr_1fr] md:gap-0">
+            <div className="md:border-r md:border-white/[0.12] md:pr-10">
+              <Image src="/logo-white.png" alt={t.logoAlt} width={1530} height={441} className="h-11 w-auto" />
               <p className="mt-4 max-w-xs">{t.footer.tagline}</p>
             </div>
             <div className="md:px-10">
@@ -178,7 +176,7 @@ export default function Shell({
                 {offices.map((o) => (
                   <li key={o.label}>
                     <p className="font-semibold text-white">{o.label}</p>
-                    <p>{o.city}</p>
+                    <p>{addressLine(o)}</p>
                     <a href={tel(o.phone)} className="hover:underline">{o.phone}</a>
                   </li>
                 ))}
@@ -193,7 +191,7 @@ export default function Shell({
               </ul>
             </div>
           </div>
-          <p className="border-t border-white/15 px-6 py-4 text-xs text-white/55 sm:px-10">
+          <p className="border-t border-white/[0.12] px-6 py-4 text-xs text-white/55 sm:px-10">
             © 2026 {company.name}. {t.footer.rights}
           </p>
         </div>

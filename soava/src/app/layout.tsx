@@ -21,9 +21,9 @@ const mono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const title = "SOAVA Global Logistics : colis du Canada vers Madagascar";
+const title = "Soava Group : une entreprise canadienne à ambition mondiale";
 const description =
-  "SOAVA collecte vos achats au Canada, les vérifie, les expédie vers Madagascar et les remet à leur destinataire. Contactez notre équipe au Canada ou à Madagascar.";
+  "Soava Group, ancré au Canada, réunit logistique et livraison express, agroalimentaire et superfoods, mines et ressources stratégiques.";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
 

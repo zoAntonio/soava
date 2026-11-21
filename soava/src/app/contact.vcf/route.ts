@@ -2,6 +2,7 @@ import { company } from "@/lib/company";
 
 // Fiche contact téléchargeable : s'ajoute directement au carnet d'adresses.
 export async function GET() {
+  const digits = (p: string) => `+1${p.replace(/\D/g, "")}`;
   const vcf = [
     "BEGIN:VCARD",
     "VERSION:3.0",
@@ -9,8 +10,10 @@ export async function GET() {
     `ORG:${company.name}`,
     `TITLE:${company.tagline}`,
     `EMAIL;TYPE=WORK:${company.email}`,
-    `TEL;TYPE=WORK,VOICE:${company.canada.phone}`,
-    `TEL;TYPE=WORK,VOICE:${company.madagascar.phone}`,
+    ...company.offices.flatMap((o) => [
+      `TEL;TYPE=WORK,VOICE:${digits(o.phone)}`,
+      `ADR;TYPE=WORK:;;${o.street};${o.city};${o.region};${o.postal};Canada`,
+    ]),
     "END:VCARD",
     "",
   ].join("\r\n");

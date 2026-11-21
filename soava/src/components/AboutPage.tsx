@@ -11,15 +11,15 @@ export default function AboutPage({ lang }: { lang: Lang }) {
         <div className="self-center">
           <Eyebrow>{t.about.eyebrow}</Eyebrow>
           <Heading as="h1" className="!text-[2.6rem] sm:!text-6xl">{t.about.title}</Heading>
-          <p data-reveal className="mt-6 max-w-md leading-relaxed text-navy/70">{t.about.text}</p>
+          <p data-reveal className="mt-6 max-w-md leading-relaxed text-body">{t.about.text}</p>
           <Link
             href={routeHref(lang, "contact")}
-            className="mt-8 inline-block rounded-full bg-navy px-8 py-3.5 text-sm font-semibold text-white hover:bg-navy/90"
+            className="mt-8 inline-block rounded-full bg-cta px-8 py-3.5 text-sm font-semibold text-white hover:bg-cta/90"
           >
             {t.cta.contact}
           </Link>
         </div>
-        <Visual src="/photos/bureau.jpg" className="min-h-[22rem] lg:min-h-[32rem]">
+        <Visual src="/photos/montreal.jpg" className="min-h-[22rem] lg:min-h-[32rem]">
           <span className="absolute bottom-4 right-4 rounded-full bg-white/90 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-navy">
             {t.about.badge}
           </span>
@@ -32,7 +32,7 @@ export default function AboutPage({ lang }: { lang: Lang }) {
             <Eyebrow>{t.about.storyEyebrow}</Eyebrow>
             <Heading className="max-w-sm">{t.about.storyTitle}</Heading>
           </div>
-          <div className="space-y-6 leading-relaxed text-navy/70">
+          <div className="space-y-6 leading-relaxed text-body">
             <div>
               <h3 data-reveal className="text-lg font-medium text-navy">{t.about.vision}</h3>
               <p data-reveal className="mt-1">{t.about.visionText}</p>
@@ -43,7 +43,7 @@ export default function AboutPage({ lang }: { lang: Lang }) {
             </div>
           </div>
         </div>
-        <Visual src="/photos/equipe.jpg" className="mt-12 min-h-64 sm:min-h-96" />
+        <Visual src="/photos/avion.jpg" className="mt-12 min-h-64 sm:min-h-96" />
       </section>
 
       <Values lang={lang} />

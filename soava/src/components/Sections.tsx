@@ -67,14 +67,14 @@ export function Divisions({ lang }: { lang: Lang }) {
     <section id="poles" className="mx-auto max-w-6xl scroll-mt-28 px-5 py-14 sm:px-6 sm:py-24">
       <Eyebrow>{t.eyebrow}</Eyebrow>
       <Heading className="max-w-3xl">{t.title}</Heading>
-      <div className="mt-10 grid overflow-hidden rounded-2xl border border-navy/15 bg-white sm:mt-14 md:grid-cols-[1fr_1.7fr]">
-        <Visual src="/photos/batiment.jpg" className="min-h-56 rounded-none md:min-h-full" />
-        <ol className="divide-y divide-navy/15">
+      <div className="mt-10 grid overflow-hidden rounded-2xl border border-line bg-white sm:mt-14 md:grid-cols-[1fr_1.7fr]">
+        <Visual src="/photos/conteneurs.jpg" className="min-h-56 rounded-none md:min-h-full" />
+        <ol className="divide-y divide-line">
           {t.items.map((d, i) => (
             <li key={d.title} data-reveal style={{ ["--d" as string]: `${i * 90}ms` }} className="p-6 sm:p-8">
               <span className="text-xs text-navy/50">{num(i)}</span>
               <h3 className="mt-3 text-xl font-medium text-navy">{d.title}</h3>
-              <p className="mt-2 leading-relaxed text-navy/70">{d.text}</p>
+              <p className="mt-2 leading-relaxed text-body">{d.text}</p>
             </li>
           ))}
         </ol>
@@ -89,14 +89,14 @@ export function Values({ lang }: { lang: Lang }) {
     <section id="valeurs" className="mx-auto max-w-6xl scroll-mt-28 px-5 py-14 sm:px-6 sm:py-24">
       <Eyebrow>{t.eyebrow}</Eyebrow>
       <Heading className="max-w-xl">{t.title}</Heading>
-      <div className="mt-10 grid overflow-hidden rounded-2xl border border-navy/15 bg-white sm:mt-14 md:grid-cols-[1fr_1.9fr]">
-        <Visual src="/photos/echange.jpg" className="min-h-56 rounded-none md:min-h-full" />
+      <div className="mt-10 grid overflow-hidden rounded-2xl border border-line bg-white sm:mt-14 md:grid-cols-[1fr_1.9fr]">
+        <Visual src="/photos/baobabs.jpg" className="min-h-56 rounded-none md:min-h-full" />
         <ol className="grid sm:grid-cols-2">
           {t.items.map((v, i) => (
-            <li key={v.title} data-reveal style={{ ["--d" as string]: `${i * 90}ms` }} className="border-b border-navy/15 p-6 last:border-b-0 sm:p-8 sm:odd:border-r sm:[&:nth-last-child(2)]:border-b-0">
+            <li key={v.title} data-reveal style={{ ["--d" as string]: `${i * 90}ms` }} className="border-b border-line p-6 last:border-b-0 sm:p-8 sm:odd:border-r sm:[&:nth-last-child(2)]:border-b-0">
               <span className="text-xs text-navy/50">{num(i)}</span>
               <h3 className="mt-3 text-xl font-medium text-navy">{v.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-navy/70">{v.text}</p>
+              <p className="mt-2 text-sm leading-relaxed text-body">{v.text}</p>
             </li>
           ))}
         </ol>
@@ -111,10 +111,10 @@ export function Band({ lang }: { lang: Lang }) {
     <section className="mx-auto max-w-6xl px-5 pb-14 sm:px-6 sm:pb-24">
       <div data-reveal className="rounded-2xl bg-tint px-6 py-16 text-center sm:py-24">
         <h2 className="mx-auto max-w-2xl text-[2.4rem] font-light leading-[1.05] text-navy sm:text-5xl lg:text-6xl">{t.title}</h2>
-        <p className="mx-auto mt-5 max-w-md text-navy/70">{t.text}</p>
+        <p className="mx-auto mt-5 max-w-md text-body">{t.text}</p>
         <Link
           href={routeHref(lang, "contact")}
-          className="mt-8 inline-block rounded-full bg-navy px-8 py-3.5 text-sm font-semibold text-white hover:bg-navy/90"
+          className="mt-8 inline-block rounded-full bg-cta px-8 py-3.5 text-sm font-semibold text-white hover:bg-cta/90"
         >
           {t.button}
         </Link>
