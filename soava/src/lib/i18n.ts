@@ -67,7 +67,7 @@ export const dict: Record<Lang, Dict> = {
       },
       contact: {
         title: "Contact | Soava Group",
-        description: "Écrivez à Soava Group ou appelez notre bureau au Canada ou à Madagascar.",
+        description: "Écrivez à Soava Group ou appelez l'un de nos bureaux : Ottawa, Montréal ou Québec.",
       },
     },
     skip: "Aller au contenu",
@@ -184,7 +184,7 @@ export const dict: Record<Lang, Dict> = {
       },
       contact: {
         title: "Contact | Soava Group",
-        description: "Write to Soava Group or call our office in Canada or Madagascar.",
+        description: "Write to Soava Group or call one of our offices: Ottawa, Montréal or Québec.",
       },
     },
     skip: "Skip to content",

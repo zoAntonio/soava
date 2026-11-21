@@ -5,13 +5,20 @@
    Vert : couleur secondaire (progression, validation, repères).
    Rouge : signature canadienne, rare (un mot, un repère). */
 :root {
-  --background: #fafaf8;
-  --foreground: #0a1633;
-  --navy: #0a1633;
-  --tint: #e8edf3; /* voile de bleu marine pour panneaux et en-tête */
-  --red: #e30200;
-  --green: #429600;
-  --green-ink: #2f6e00; /* vert foncé pour le petit texte, contraste AA sur blanc */
+  --background: #ffffff;
+  --foreground: #0a192f;
+  --navy: #0a192f; /* bleu nuit profond : titres, sections sombres */
+  --slate-deep: #112240; /* bleu ardoise foncé : cartes sur fond sombre */
+  --ice: #f6f8fa; /* gris glacé : fonds secondaires et cartes claires */
+  --body: #475569; /* gris ardoise : texte courant */
+  --line: #e2e8f0; /* gris perle : bordures fines */
+  --mist: #cbd5e1; /* gris clair : texte courant sur fond sombre */
+  --cta: #0f7b58; /* vert émeraude : bouton d'action sur fond clair, texte blanc */
+  --cta-bright: #10b981; /* émeraude lumineux : bouton d'action sur fond sombre, texte bleu nuit */
+  --red: #e30200; /* rouge du logo : touche rare */
+  --green: #10b981;
+  --green-ink: #0f7b58;
+  --tint: #f6f8fa;
 }
 
 @theme inline {
@@ -19,6 +26,13 @@
   --color-foreground: var(--foreground);
   --color-navy: var(--navy);
   --color-tint: var(--tint);
+  --color-slate-deep: var(--slate-deep);
+  --color-ice: var(--ice);
+  --color-body: var(--body);
+  --color-line: var(--line);
+  --color-mist: var(--mist);
+  --color-cta: var(--cta);
+  --color-cta-bright: var(--cta-bright);
   --color-brand-red: var(--red);
   --color-brand-green: var(--green);
   --color-green-ink: var(--green-ink);
