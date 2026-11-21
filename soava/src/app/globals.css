@@ -5,9 +5,10 @@
    Vert : couleur secondaire (progression, validation, repères).
    Rouge : signature canadienne, rare (un mot, un repère). */
 :root {
-  --background: #ffffff;
+  --background: #fafaf8;
   --foreground: #0a1633;
   --navy: #0a1633;
+  --tint: #e8edf3; /* voile de bleu marine pour panneaux et en-tête */
   --red: #e30200;
   --green: #429600;
   --green-ink: #2f6e00; /* vert foncé pour le petit texte, contraste AA sur blanc */
@@ -17,6 +18,7 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-navy: var(--navy);
+  --color-tint: var(--tint);
   --color-brand-red: var(--red);
   --color-brand-green: var(--green);
   --color-green-ink: var(--green-ink);

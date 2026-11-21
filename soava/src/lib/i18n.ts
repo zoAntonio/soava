@@ -46,25 +46,7 @@ export type Dict = {
     qrAlt: string;
     qrDownload: string;
   };
-  form: {
-    title: string;
-    subtitle: string;
-    note: string;
-    name: string;
-    company: string;
-    email: string;
-    division: string;
-    placeholder: string;
-    other: string;
-    message: string;
-    submit: string;
-    required: string;
-    invalidEmail: string;
-    sent: string;
-    subject: string;
-  };
   footer: { tagline: string; offices: string; navigate: string; rights: string };
-  bar: { call: string; email: string; contact: string; label: string };
   logoAlt: string;
 };
 
@@ -178,30 +160,12 @@ export const dict: Record<Lang, Dict> = {
       qrAlt: "QR code vers le site Soava",
       qrDownload: "Télécharger le QR code",
     },
-    form: {
-      title: "Demande de contact",
-      subtitle: "Dites-nous ce dont vous avez besoin.",
-      note: "À l'envoi, votre application de messagerie s'ouvre avec votre message prêt à partir.",
-      name: "Nom",
-      company: "Entreprise",
-      email: "Courriel",
-      division: "Pôle d'activité",
-      placeholder: "Choisir un pôle…",
-      other: "Autre",
-      message: "Comment pouvons-nous vous aider ?",
-      submit: "Envoyer la demande",
-      required: "Ce champ est obligatoire.",
-      invalidEmail: "Entrez une adresse courriel valide.",
-      sent: "Votre application de messagerie s'est ouverte. Envoyez le message pour finaliser votre demande.",
-      subject: "Demande de contact via le site",
-    },
     footer: {
       tagline: "Soava Group, ancré au Canada, tourné vers le monde.",
       offices: "Bureaux",
       navigate: "Navigation",
       rights: "Tous droits réservés.",
     },
-    bar: { call: "Appeler", email: "E-mail", contact: "Contact", label: "Actions rapides" },
     logoAlt: "Soava Global Logistics Inc., Beyond Borders",
   },
   en: {
@@ -313,30 +277,12 @@ export const dict: Record<Lang, Dict> = {
       qrAlt: "QR code to the Soava website",
       qrDownload: "Download the QR code",
     },
-    form: {
-      title: "Contact request",
-      subtitle: "Tell us what you need.",
-      note: "On sending, your email app opens with your message ready to go.",
-      name: "Name",
-      company: "Company",
-      email: "Email",
-      division: "Division",
-      placeholder: "Select a division…",
-      other: "Other",
-      message: "How can we help?",
-      submit: "Send request",
-      required: "This field is required.",
-      invalidEmail: "Enter a valid email address.",
-      sent: "Your email app has opened. Send the message to complete your request.",
-      subject: "Contact request from the website",
-    },
     footer: {
       tagline: "Soava Group, grounded in Canada, facing the world.",
       offices: "Offices",
       navigate: "Navigate",
       rights: "All rights reserved.",
     },
-    bar: { call: "Call", email: "Email", contact: "Contact", label: "Quick actions" },
     logoAlt: "Soava Global Logistics Inc., Beyond Borders",
   },
 };

@@ -21,7 +21,7 @@ export default function QrCard({ alt, download }: { alt: string; download: strin
 
   return (
     <div className="flex flex-col items-center text-navy">
-      <div className="grid h-52 w-52 place-items-center rounded-md border border-navy/20">
+      <div className="grid h-52 w-52 place-items-center rounded-xl border border-navy/20">
         {png ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img src={png} alt={alt} className="h-full w-full" />
@@ -34,7 +34,7 @@ export default function QrCard({ alt, download }: { alt: string; download: strin
         <a
           href={png}
           download="soava-qr.png"
-          className="mt-4 rounded-md bg-navy px-5 py-2.5 text-sm font-semibold text-white hover:bg-navy/90"
+          className="mt-4 rounded-full bg-navy px-5 py-2.5 text-sm font-semibold text-white hover:bg-navy/90"
         >
           {download}
         </a>

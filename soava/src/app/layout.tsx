@@ -7,7 +7,7 @@ import "./globals.css";
 const head = Montserrat({
   variable: "--font-head",
   subsets: ["latin"],
-  weight: ["600", "700", "800"],
+  weight: ["300", "400", "500", "600", "700"],
 });
 
 const body = Public_Sans({
