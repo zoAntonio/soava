@@ -39,7 +39,6 @@ export type Dict = {
     text: string;
     locations: string;
     offices: string;
-    addToContacts: string;
     qrTitle: string;
     qrText: string;
     qrAlt: string;
@@ -152,7 +151,6 @@ export const dict: Record<Lang, Dict> = {
       text: "Pour un envoi, un partenariat ou une question sur nos pôles d'activités, écrivez-nous ou appelez le bureau le plus proche de vous.",
       locations: "Nos bureaux",
       offices: "Bureaux",
-      addToContacts: "Ajouter Soava à mes contacts",
       qrTitle: "Retrouvez-nous plus tard",
       qrText: "Scannez ce code avec votre téléphone pour enregistrer le site.",
       qrAlt: "QR code vers le site Soava",
@@ -268,7 +266,6 @@ export const dict: Record<Lang, Dict> = {
       text: "For a shipment, a partnership or a question about our divisions, write to us or call the office closest to you.",
       locations: "Our locations",
       offices: "Offices",
-      addToContacts: "Add Soava to my contacts",
       qrTitle: "Find us later",
       qrText: "Scan this code with your phone to save the site.",
       qrAlt: "QR code to the Soava website",

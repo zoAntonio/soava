@@ -49,12 +49,6 @@ export default function ContactPage({ lang }: { lang: Lang }) {
               <p data-reveal className="mx-auto mb-5 mt-2 max-w-xs text-sm text-body">{t.contactPage.qrText}</p>
               <QrCard alt={t.contactPage.qrAlt} download={t.contactPage.qrDownload} />
             </div>
-            <a
-              href="/contact.vcf"
-              className="mt-5 block rounded-full bg-cta px-7 py-3.5 text-center text-sm font-semibold text-white hover:bg-cta/90"
-            >
-              {t.contactPage.addToContacts}
-            </a>
           </div>
         </div>
       </section>
