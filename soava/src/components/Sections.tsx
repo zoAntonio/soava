@@ -6,7 +6,7 @@ export const num = (i: number) => String(i + 1).padStart(2, "0");
 
 export function Eyebrow({ children, light = false }: { children: React.ReactNode; light?: boolean }) {
   return (
-    <p className={`text-xs font-semibold uppercase tracking-[0.18em] ${light ? "text-brand-green" : "text-green-ink"}`}>
+    <p data-reveal className={`text-xs font-semibold uppercase tracking-[0.18em] ${light ? "text-brand-green" : "text-green-ink"}`}>
       {children}
     </p>
   );
@@ -24,7 +24,7 @@ export function Heading({
   className?: string;
 }) {
   return (
-    <Tag className={`mt-3 text-[2.4rem] font-light leading-[1.05] sm:text-5xl lg:text-6xl ${light ? "text-white" : "text-navy"} ${className}`}>
+    <Tag data-reveal className={`mt-3 text-[2.4rem] font-light leading-[1.05] sm:text-5xl lg:text-6xl ${light ? "text-white" : "text-navy"} ${className}`}>
       {children}
     </Tag>
   );
@@ -44,7 +44,7 @@ export function Visual({
   children?: React.ReactNode;
 }) {
   return (
-    <div className={`relative overflow-hidden rounded-2xl bg-tint ${className}`}>
+    <div data-reveal className={`relative overflow-hidden rounded-2xl bg-tint ${className}`}>
       {src ? (
         <Image src={src} alt={alt} fill sizes="(min-width: 1024px) 50vw, 100vw" className="object-cover" />
       ) : (
@@ -71,7 +71,7 @@ export function Divisions({ lang }: { lang: Lang }) {
         <Visual className="min-h-56 rounded-none md:min-h-full" />
         <ol className="divide-y divide-navy/15">
           {t.items.map((d, i) => (
-            <li key={d.title} className="p-6 sm:p-8">
+            <li key={d.title} data-reveal style={{ ["--d" as string]: `${i * 90}ms` }} className="p-6 sm:p-8">
               <span className="text-xs text-navy/50">{num(i)}</span>
               <h3 className="mt-3 text-xl font-medium text-navy">{d.title}</h3>
               <p className="mt-2 leading-relaxed text-navy/70">{d.text}</p>
@@ -93,7 +93,7 @@ export function Values({ lang }: { lang: Lang }) {
         <Visual className="min-h-56 rounded-none md:min-h-full" />
         <ol className="grid sm:grid-cols-2">
           {t.items.map((v, i) => (
-            <li key={v.title} className="border-b border-navy/15 p-6 last:border-b-0 sm:p-8 sm:odd:border-r sm:[&:nth-last-child(2)]:border-b-0">
+            <li key={v.title} data-reveal style={{ ["--d" as string]: `${i * 90}ms` }} className="border-b border-navy/15 p-6 last:border-b-0 sm:p-8 sm:odd:border-r sm:[&:nth-last-child(2)]:border-b-0">
               <span className="text-xs text-navy/50">{num(i)}</span>
               <h3 className="mt-3 text-xl font-medium text-navy">{v.title}</h3>
               <p className="mt-2 text-sm leading-relaxed text-navy/70">{v.text}</p>
@@ -109,7 +109,7 @@ export function Band({ lang }: { lang: Lang }) {
   const t = dict[lang].band;
   return (
     <section className="mx-auto max-w-6xl px-5 pb-14 sm:px-6 sm:pb-24">
-      <div className="rounded-2xl bg-tint px-6 py-16 text-center sm:py-24">
+      <div data-reveal className="rounded-2xl bg-tint px-6 py-16 text-center sm:py-24">
         <h2 className="mx-auto max-w-2xl text-[2.4rem] font-light leading-[1.05] text-navy sm:text-5xl lg:text-6xl">{t.title}</h2>
         <p className="mx-auto mt-5 max-w-md text-navy/70">{t.text}</p>
         <Link

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import LangSync from "@/components/LangSync";
+import RevealInit from "@/components/RevealInit";
 import { company } from "@/lib/company";
 import { dict, routeHref, type Lang, type Route } from "@/lib/i18n";
 
@@ -70,7 +71,7 @@ function LangSwitch({ lang, route, label }: { lang: Lang; route: Route; label: s
           <path d="M6 9l6 6 6-6" />
         </svg>
       </summary>
-      <ul className="absolute right-0 top-12 z-40 w-44 overflow-hidden rounded-xl border border-navy/15 bg-white text-sm font-semibold text-navy shadow-lg">
+      <ul className="absolute right-0 top-12 z-40 w-28 overflow-hidden rounded-xl border border-navy/15 bg-white text-sm font-semibold text-navy shadow-lg">
         {(["fr", "en"] as const).map((l) => (
           <li key={l}>
             <Link
@@ -81,8 +82,7 @@ function LangSwitch({ lang, route, label }: { lang: Lang; route: Route; label: s
               className={`flex items-center gap-3 px-4 py-3 hover:bg-navy/5 ${lang === l ? "bg-tint" : ""}`}
             >
               <Flag lang={l} />
-              <span>{l.toUpperCase()}</span>
-              <span className="font-normal text-navy/65">{langNames[l]}</span>
+              <span aria-label={langNames[l]}>{l.toUpperCase()}</span>
             </Link>
           </li>
         ))}
@@ -112,6 +112,7 @@ export default function Shell({
   return (
     <>
       <LangSync lang={t.htmlLang} />
+      <RevealInit />
       <a
         href="#contenu"
         className="sr-only focus:not-sr-only focus:absolute focus:left-3 focus:top-3 focus:z-50 focus:rounded-md focus:bg-navy focus:px-4 focus:py-2 focus:text-white"

@@ -11,7 +11,7 @@ export default function AboutPage({ lang }: { lang: Lang }) {
         <div className="self-center">
           <Eyebrow>{t.about.eyebrow}</Eyebrow>
           <Heading as="h1" className="!text-[2.6rem] sm:!text-6xl">{t.about.title}</Heading>
-          <p className="mt-6 max-w-md leading-relaxed text-navy/70">{t.about.text}</p>
+          <p data-reveal className="mt-6 max-w-md leading-relaxed text-navy/70">{t.about.text}</p>
           <Link
             href={routeHref(lang, "contact")}
             className="mt-8 inline-block rounded-full bg-navy px-8 py-3.5 text-sm font-semibold text-white hover:bg-navy/90"
@@ -34,12 +34,12 @@ export default function AboutPage({ lang }: { lang: Lang }) {
           </div>
           <div className="space-y-6 leading-relaxed text-navy/70">
             <div>
-              <h3 className="text-lg font-medium text-navy">{t.about.vision}</h3>
-              <p className="mt-1">{t.about.visionText}</p>
+              <h3 data-reveal className="text-lg font-medium text-navy">{t.about.vision}</h3>
+              <p data-reveal className="mt-1">{t.about.visionText}</p>
             </div>
             <div>
-              <h3 className="text-lg font-medium text-navy">{t.about.mission}</h3>
-              <p className="mt-1">{t.about.missionText}</p>
+              <h3 data-reveal className="text-lg font-medium text-navy">{t.about.mission}</h3>
+              <p data-reveal className="mt-1">{t.about.missionText}</p>
             </div>
           </div>
         </div>

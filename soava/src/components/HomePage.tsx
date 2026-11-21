@@ -12,7 +12,7 @@ export default function HomePage({ lang }: { lang: Lang }) {
         <div className="self-center">
           <Eyebrow>{t.hero.eyebrow}</Eyebrow>
           <Heading as="h1" className="!text-[2.6rem] sm:!text-6xl">{t.hero.title}</Heading>
-          <p className="mt-6 max-w-md leading-relaxed text-navy/70">{t.hero.text}</p>
+          <p data-reveal className="mt-6 max-w-md leading-relaxed text-navy/70">{t.hero.text}</p>
           <div className="mt-8 flex flex-col gap-3 min-[460px]:flex-row">
             <Link href="#poles" className="rounded-full bg-navy px-8 py-3.5 text-center text-sm font-semibold text-white hover:bg-navy/90">
               {t.cta.divisions}
@@ -28,11 +28,11 @@ export default function HomePage({ lang }: { lang: Lang }) {
 
         <Visual className="min-h-[26rem] lg:min-h-[34rem]">
           <div className="absolute inset-x-4 bottom-6 rounded-xl bg-white/95 p-5 text-navy sm:inset-x-6 sm:p-6">
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-green-ink">{t.hero.tag}</p>
+            <p data-reveal className="text-xs font-semibold uppercase tracking-[0.18em] text-green-ink">{t.hero.tag}</p>
             <h2 className="mt-1.5 text-xl font-medium">{t.hero.featured}</h2>
-            <p className="mt-2 text-sm leading-relaxed text-navy/70">{t.hero.featuredText}</p>
-            <a href="https://soavaexpress.com" className="mt-3 inline-block border-b-2 border-brand-red pb-0.5 text-sm font-semibold hover:text-green-ink">
-              soavaexpress.com
+            <p data-reveal className="mt-2 text-sm leading-relaxed text-navy/70">{t.hero.featuredText}</p>
+            <a href="https://soavagroup.com" className="mt-3 inline-block border-b-2 border-brand-red pb-0.5 text-sm font-semibold hover:text-green-ink">
+              soavagroup.com
             </a>
           </div>
         </Visual>
@@ -41,7 +41,7 @@ export default function HomePage({ lang }: { lang: Lang }) {
       {/* Approche */}
       <section className="mx-auto max-w-4xl px-5 pb-14 text-center sm:px-6 sm:pb-24">
         <Eyebrow>{t.about.dna}</Eyebrow>
-        <p className="mt-5 font-heading text-2xl font-light leading-snug text-navy sm:text-4xl">{t.about.dnaText}</p>
+        <p data-reveal className="mt-5 font-heading text-2xl font-light leading-snug text-navy sm:text-4xl">{t.about.dnaText}</p>
         <Link href={routeHref(lang, "about")} className="mt-8 inline-block border-b-2 border-brand-red pb-0.5 text-sm font-semibold text-navy hover:text-green-ink">
           {t.cta.learnMore}
         </Link>
@@ -61,7 +61,7 @@ export default function HomePage({ lang }: { lang: Lang }) {
                     <span aria-hidden className="grid h-6 w-6 shrink-0 place-items-center rounded-full border border-white/40 text-sm leading-none group-open:hidden">+</span>
                     <span aria-hidden className="hidden h-6 w-6 shrink-0 place-items-center rounded-full border border-white/40 text-sm leading-none group-open:grid">×</span>
                   </summary>
-                  <p className="pb-5 text-sm leading-relaxed text-white/75">{v.text}</p>
+                  <p data-reveal className="pb-5 text-sm leading-relaxed text-white/75">{v.text}</p>
                 </details>
               ))}
             </div>

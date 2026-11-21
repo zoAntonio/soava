@@ -12,8 +12,8 @@ export default function ContactPage({ lang }: { lang: Lang }) {
       <section className="mx-auto max-w-6xl px-5 pb-12 pt-10 sm:px-6 sm:pb-16 sm:pt-16">
         <Eyebrow>{t.nav.contact}</Eyebrow>
         <Heading as="h1" className="!text-[2.6rem] sm:!text-6xl">{t.contactPage.title}</Heading>
-        <p className="mt-4 font-heading text-xl font-light text-green-ink sm:text-2xl">{t.contactPage.subtitle}</p>
-        <p className="mt-5 max-w-xl leading-relaxed text-navy/70">{t.contactPage.text}</p>
+        <p data-reveal className="mt-4 font-heading text-xl font-light text-green-ink sm:text-2xl">{t.contactPage.subtitle}</p>
+        <p data-reveal className="mt-5 max-w-xl leading-relaxed text-navy/70">{t.contactPage.text}</p>
       </section>
 
       <section className="mx-auto max-w-6xl px-5 pb-14 sm:px-6 sm:pb-20">
@@ -25,8 +25,8 @@ export default function ContactPage({ lang }: { lang: Lang }) {
                 <span className={`mr-3 inline-block h-2.5 w-2.5 rounded-full ${i === 0 ? "bg-brand-red" : "bg-brand-green"}`} aria-hidden />
                 {o.label}
               </h2>
-              <p className="mt-1 text-sm text-navy/60">{o.city}</p>
-              <p className="mt-3 text-navy/70">{o.address}</p>
+              <p data-reveal className="mt-1 text-sm text-navy/60">{o.city}</p>
+              <p data-reveal className="mt-3 text-navy/70">{o.address}</p>
               <a href={tel(o.phone)} className="mt-3 flex items-center gap-3 font-semibold text-navy hover:text-green-ink hover:underline">
                 {icons.phone}
                 {o.phone}
@@ -51,7 +51,7 @@ export default function ContactPage({ lang }: { lang: Lang }) {
           <div className="mx-auto max-w-md">
             <div className="rounded-2xl bg-white p-6 text-center text-navy">
               <h2 className="text-xl font-medium">{t.contactPage.qrTitle}</h2>
-              <p className="mx-auto mb-5 mt-2 max-w-xs text-sm text-navy/65">{t.contactPage.qrText}</p>
+              <p data-reveal className="mx-auto mb-5 mt-2 max-w-xs text-sm text-navy/65">{t.contactPage.qrText}</p>
               <QrCard alt={t.contactPage.qrAlt} download={t.contactPage.qrDownload} />
             </div>
             <a
